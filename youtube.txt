@@ -1,0 +1,1640 @@
+https://www.youtube.com/watch?v=CrUyFIDF-Jc
+
+JavaScript:
+
+const price=[25,'apple',null,undefined,{a:1,b:2,c:6},new Date()];
+const number=[45,44,25,69];
+let val;
+
+Get Array Length :- val = price.length;
+check if is array :- val = Array.isArray(price);
+Get single value:- val = price[3];
+Insert into array:- price[2]='rubber';
+Find the index of value:- val = price.indexOf(null);
+Add on to End :-  price.push(450);
+Add on to front:- price.unshift(45);
+Take off from end :-  price.pop(); doesn't need any parameter
+Take off from front :- price.shift(); doesn't need any parameter 
+Splice Values:- price.splice(1,1); removes the particular value
+typeof :- this is used in method to know which data type is belongs to ex:- const name2 = new String('jeff'); console.log(typeof name2);
+Reserve :- price.reverse(); it changes all the values in Array.
+concatenate Array :- val = price.concat(number) ;
+
+Sorting arrays:- val = price.sort(); 
+	   val = number.sort(); here we get only Starting digit will in serial no.
+Use compare function:- val = number.sort(function(x,y){ return x-y;});
+
+revers sort :- val = number.sort(function(x,y){return y-x;});
+Find :- it takes in testing function
+	function under50(num){
+	return num<50;}
+	val = number.find(under50);
+
+consolse.log(val);
+console.log(price);
+
+Objects:
+---------
+	const person = {
+	 firstName : 'steven';
+	lastName :'dhee';
+	address:{
+	city:"johannesburg",
+	street:"main lev"
+		}
+	hobbies:["cricket","volleyball"],
+	 }
+
+	const people = [
+ 	 {name:"john",age : 30,email:'john@email'},
+ 	 {name:'carle',age : 25,email:'carley@email'},
+	  {name:'anitha',age : 28,email:'anitha@email'},
+ 	 {name:'sunny'}
+		]
+
+	for(let i=0;i < people.length;i++){
+	  console.log(people[i].name);
+		}
+
+ Date & Time:
+ ---------------
+	let val;
+	const today = new Date();
+	let birthday = new Date("10-08-1995");  <- this represents bithday but the time remains 00:00:00
+	
+	val = today;
+	val = today.getMonth(); <- this denotes the month of the running month
+	val = today.getDate(); <- this show the date of running date
+	val = today.getDay(); <- this show the number of the week days of current
+	val = today.getFullYear(); <- this show the number of the current year
+	val =today.getHours();<- this shows the number of the present hour
+	val = today.getMinutes();<- this shows the present minutes
+
+	console.log(val) 
+here we set the time :
+	birthday.setMonth(2); <- this 2 in parameter indicates that set of the month 
+	birthday.setYear(1980); <- this 1980 in parameter indicates that to set  the year
+
+If Statement & Comparsion Operator :
+---------------------------------------------
+	const id = 100;
+		//Equal To
+	if(id == 100){
+	console.log("correct")
+	}else{
+  	console.log("Wrong");
+	}
+	//Not Equal To
+	if(id != 101){
+	  console.log("correct")
+ 	 }else{
+  	  console.log("Wrong");
+  	}
+ 	 //Equal To Value & Type
+	if(id === 100){
+  	console.log("correct")
+ 	 }else{
+   	 console.log("Wrong");
+ 	 }
+ 	 //Not Equal To Value & Type
+	if(id !== 100){
+	  console.log("correct")
+ 	 }else{
+  	  console.log("Wrong");
+  	}
+	// Test If Undefined -->  here there is no variable declartion as const id =100
+	if(typeof id !== 'undefined'){
+	console.log(`the id is ${id}`);
+	}else{
+	console.log('no ID');
+	}
+	//Greater ot less than
+	if(id>200){
+ 	 console.log("correct");
+	}else{
+ 	 console.log("incorrect");
+	}
+	//ELSE IF
+	const color = "yellow";
+	if(color === "red"){
+  	console.log("this is red color");
+	}else if(color === "blue"){
+	  console.log("this is blue color");
+	}else{
+ 	 console.log("this is not red & blue color");
+	}
+	// Logical Operator
+const name = "steve"
+const age = 17;
+//And && 
+if(age >=0 && age<=12){
+  console.log(`${name} is child`)
+}else if(age>=13 && age<=19){
+  console.log(`${name} is the teenager`)
+}else{
+  console.log(`${name} is the adult`)
+}
+
+//OR ||
+if(age < 16 || age > 60){
+  console.log(`${name} cannot run in race game`);
+}else{
+  console.log(`${name} register for a race`)
+}
+//Ternary Operator
+
+console.log( id === 100 ? 'correct' : 'incorrect'); here ?= ternary operator, : = else
+
+//Switch CAse
+
+const color ='orange';
+
+switch(color){
+  case 'red' :
+    console.log('Color is red');
+    break;
+  case 'blue' :
+    console.log('color is Blue');
+    break;
+    default:
+      console.log('color is not red and blue');
+  break;
+}
+
+let day;
+switch(new Date().getDay()){
+case 0:
+  day = "sunday";
+  break;
+case 1:
+  day = "Monday";
+  break;
+case 2:
+  day = "Tuesday";
+  break;
+case 3:
+  day = "Wednesday";
+  break;
+case 4:
+  day = "Thursday";
+  break;
+case 5:
+  day = "Friday";
+  break;
+case 6:
+  day = "Saturday";
+  break;
+  default :
+  day = "there no day";
+  break;
+}
+console.log(`today is ${day}`);
+
+Functions Declarations & Expressions:
+-------------------------------------------
+	Functions are blocks of code that can be defined and then called at a later time or in some cases or defined in call the same time..
+
+function great(){
+  // console.log("hello");
+  return 'hello';
+}
+
+console.log(great()); --> here we are calling the function.
+
+All types of function they can take in paramerters are called arguments.
+here is example:-
+	function great(firstName,lastName){
+ 	 return 'hello' +' '+ firstName+ ' '+lastName;
+	}
+
+	console.log(great('john','deo'));
+
+function great(firstName,lastName){
+  if(typeof firstName === 'undefined'){firstName = "john"}
+   if(typeof lastName === 'undefined'){lastName = 'deo'}
+  // console.log("hello");
+  return 'hello' +' '+ firstName+ ' '+lastName;
+}
+
+console.log(great());
+	or
+function  great(firstName='john',lastName="kills"){
+return 'hello '+ firstName + ' ' +lastName;
+}
+console.log(geat());
+
+/*Function Expressions */
+
+	Now a funcrtion expression is basically putting a function as a  variable assignment.
+example:-
+const square = function(y=8){
+return y*y;
+};
+console.log(square())
+/* IMmidiately Invokable Function Expression */
+
+(function(){
+  console.log('IIFL');
+})();
+
+
+()->here with out call barcets the above function doesnot work.
+
+passing the name in parameter in below function :
+
+(function(name){
+  console.log('hello '+ name)
+})('bard');	
+
+/*PROPERTY Methods*/
+When a function is put inside of an object it's called a method.
+
+const Object ={
+  add: function(){
+    console.log('lose out')
+},
+  edit: function(id){
+    console.log(`this is a ${id}`)
+  }
+}
+Object.delete = function(){
+  console.log("your deleted");
+  }
+
+Object.add();
+Object.edit('remo');
+
+Object.delete();
+ 
+
+LOOPS And Iterations:
+----------------------------
+
+so a Loop is an Instruction that repeats until a specific condition is reached.So for instance at the end of an array or when a certain number is reached loop are used to run the same block of code using different values each time.
+
+There 's multiple ways to run iterattions in javascript and in  most langauge the three most popular types of general loops are for loop, while loops and do while loops.
+
+/*For Loop*/
+for(let i=0;i < 10;i++){
+  if( i === 2){
+    console.log('2 is my fav number');
+    continue;
+  }
+ if( i === 5 ){
+console.log('stop the loop');
+break;
+}
+  console.log(i);
+}
+-Here Continue statement is just keep going with the loop ,go to next iteration.
+- Here Break Statement is to break the loop till the condition. 
+
+/* While loop */
+
+let i=0;
+while(i < 10){
+console.log(i);
+i++;
+}
+
+/* Do while Loop */
+
+let i=0;
+
+do{
+  
+  console.log(i);
+  i++;
+}
+while(i<10)
+
+Here there is in do while there do will show the result unless while is been in condition or not.
+
+/*Loop through Arrays */
+const cars = ['zen','dezire','kwid','hyundai']
+
+ for(let i=0;i<cars.length;i++){  -->here length is used to denote the array length.
+  console.log(cars[i]);  --> here cars[i] is used for to cars of i for print.
+}
+
+now lets do for Foreach Loop:
+here forEach method it takes in the callback function so it takes in a self-claming function. and not an anonymous function.
+
+it can take in three different things but u really only need one and that is whatever u want to use in current iteration or the iterator.
+
+// for each loop
+
+cars.forEach(function(car){
+  console.log(car);
+})
+
+The Second thing is index :
+
+cars.forEach(function(car , index){
+  console.log(`${index} : ${car}`);
+})
+
+the Third thing is array:
+
+cars.forEach(function(car , index ,array){
+  console.log(`${index} : ${car}`);
+console.log(array);
+})
+/*Map */
+
+now Map can work in a few different ways actually ,so basically return a diiferent array
+
+const users = [
+  {id:1,name:'steve'},
+  {id:2,name:'cure'},
+  {id:3,name:'john'}
+]
+
+const eee = users.map(function(user){
+  return user.id;
+})
+
+console.log(eee);
+
+/* For in Loop */
+
+const  user = {
+  firstName : 'john',
+  lastName : 'deo',
+  age : 30
+}
+for(let x in user){
+	console.log(x); --> here x gives us the keys (firstName,lastName,age)
+  console.log(`${x} : ${user[x]}`); --> here for getting the Key value pair so we use back ticks and use ${}. 
+}
+
+
+/*WINDOW METHOD /OBJECTS / PROPERTIES */
+
+//alert
+
+alert("this is a alert");
+console.log(123);
+
+//pormpt
+const input= prompt("this is prompt");
+
+console.log(input);
+
+//confirm
+
+if(confirm("Are you sure")){
+  console.log("yes")
+}
+else{
+  console.log("no");
+}
+
+let val;
+
+//Outter Height & outerWidth
+
+val = window.outerHeight;
+val = window.outerWidth;
+
+console.log(val);
+
+//innerHeight & innerWidth
+val = window.innerHeight
+val = window.outerWidth;
+console.log(val);
+
+// location
+val = window.location;
+val = window.location.host;
+val = window.location.href;
+val = window.location.port;
+
+//redirect
+window.location.href="http://www.google.com"
+//Reload
+window.location.reload();
+//History
+val = window.history.go(-2);
+
+//Navigator
+here the navigator doesn't takes by the window object and this is based on the browser 
+val = window.navigator;
+val = window.navigator.appName;
+
+
+/*Gobal scope */
+
+here global scope of 'var' does make the programming langauge confusion and change the to code
+
+var a = 1;
+let b=2;
+const c=3;
+// function test(){
+//   var a =4;
+//   let b =5;
+//   const c =6;
+//   console.log("function",a,b,c);
+
+// }
+// test()
+// if(true){
+//   //block Scope
+// var a= 4;
+// let b=5;
+// const c=6
+// console.log('block',a,b,c)
+
+// }
+
+for(let a=0;a<5;a++){
+console.log(`loop ${a}`)
+}
+
+console.log('global',a,b,c);
+
+DOM OBJECT:
+-------------------
+The  Document Object Model is the programming interface for HTML and XML documents.it represents the page so that programs can change the document structure, style and content.The DOM represents the document as node and objects. thaat way the programmin languages can connect to the page.
+	A Web page is a document.this document can be either displayed in the browser window or as the HTML source.
+
+let val ;
+
+val = document;	--> this denotes the all the webpage
+
+val = document.all;	--> this shows the Html page in console
+val = document.all[0]; --> all[0] or all[1] shows the every element based on the give parameter
+
+val = document.all.length   -> shows the length of the document
+val = document.head  --> shows the head of the html 
+val = document.body  --> shows the body of the html
+val =document.doctype  --> shows the doctype of  1st of html code 
+val = document.domain  ---> shows the domain (127.0.0.1)
+val = document.URL;  --> shows the present URl 
+val = document.contentType; --> shows the content type (text/html)
+val = document.characterSet; --> shows the characterSet (UTF -8)
+console.log(val);
+
+--now we can select the stuff with out using selectors.for example : we wanted to get all forms on the page we could do following:-
+
+val = document.forms; --> this shows the forms of the html paage
+val = document.forms[0]; --> shows the 1 st form of the html page
+val = documetn.forms[0].id; --> shows the id of the forms
+val = document.forms[0].method; --> shoes the method of the form (get,post)
+val = document.forms[0].action; --> shows the action of the form (ex:- http://127.0.0.1:5500/inex.php "where given action is index.php in forms tag")
+
+
+we can do by links also 
+val = document.links;
+val = dcoment.links[0];
+val = document.links[0].id;
+val = document.links[0].className;
+val = document.links[0].classList[0];
+
+we can can select them by images
+
+val = document.images;
+
+we can also do by scripts
+val = doucment.scripts;
+val = document.scripts[0].getAttribute('src'); --> shows the src name (app.js)
+
+Html collection u wanna turn them into Array , so u can use things like foreEach :
+
+let scripts = document.scripts;
+
+let scriptArr = Array.from(scripts)  --> here we create a variable of Array for converting of Array from Scripts.
+
+scriptArr.forEach(function(script){
+  console.log(script);
+   console.log(script.getAttribute('src'); --> shows the srcAttribute name of the Script (app.js)
+}) 
+
+ArrowFunction:
+scriptArr.forEach(script =>{
+console.log(script);
+})
+
+
+console.log(val);
+
+
+DOM selectors :
+-------------------
+Dom that allow us to basically pull things from the Dom and we can do different things with the elements or the nodes.
+	Jquery was used for a long time to do this stuff for DOM manipulation and DOM selection but Vanilla java script has gotten much easier to work with it.
+	So basically in vanilla JavaScript we havr a couple different selectors that can be categorized into two different type :
+1.single Element selector and 2. multiple elements selector
+ single Element selector :- it will allow you to grab  one element by its ID or its Class or Whatever   may be  and it only stores one thing. 
+Multiple element slelector :it will allow to grab multiple element by its attributes.
+
+If u use a single element selector on lets say a class that appears more than once in the dom, its gonna grab first single one.Now multiple elements selectors will actually get all of the elements with that class and then return in HTML collection or a node list depending on which selector u use.
+
+/* document.getElementById() */
+
+console.log(document.getElementById('task-form'));
+
+/*get things from the element */
+
+console.log(document.getElementById('task-form').id);
+console.log(document.getElementById('task-form').className);
+
+//changing Style
+ 
+
+document.getElementById('task-title').style.background ="#555";
+document.getElementById('task-title').style.color="#fff";
+document.getElementById('task-title').style.padding="5px";
+
+// change Content
+
+document.getElementById('task-title').textContent = "list-task";
+document.getElementById('task-title').innerText = "list-tasks";
+document.getElementById('task-title').innerHTML = "<span style='color:red'>Task List</span>";
+
+
+every time we document.getElementById('task-title),so instead of writing that so we can create a variable :
+
+const title = document.getElementById('task-title');
+//change Style
+
+title.style.background ="#555";
+ title.style.color="#fff";
+ title.style.padding="5px";
+
+// change Content
+
+title.textContent = "list-task";
+title.innerText = "list-tasks";
+title.innerHTML = "<span style='color:red'>Task List</span>";
+
+/* document.querySelector()*/
+
+this is document querySelector which is newer and much more powerful.we don't have to select things by ID ,we can select them by anything. it bascially works like jquery where u can put any CSS selector in here...
+
+console.log(document.querySelector('#task-title'));
+console.log(document.querySelector('.card-title'));
+
+document.querySelector('li').style.color='red';
+document.querySelector('ul li').style.color = 'green';
+
+document.querySelector('li:last-child').style.color='red'; -->this selects the last item of  the list and changes to color red.
+document.querySelector('li:nth-child(2)').style.color = 'blue'; --> this selects the next  item of the list and changes to blue color. 
+document.querySelector('li:nth-child(3)').textContent = "hello world"; --> this selects the next item and changes to the texts to 'Hellow World'.
+document.querySelector('li:nth-child(odd)').style.background = '#ccc'; -->it  changes the background color and selects only 1st item of list bcuz this is 'Single Element Selector..'
+document.querySelector('li:nth-child(even)').style.background = '#f4f4f4';--> this will select the even item of the 2 nd item of list bcuz this is the first item of the even count in the list .so this Single Element Selector.. 
+
+/*document.getElementsByClassName() */
+
+const items =document.getElementsByClassName('collection-item');
+
+console.log(items); --> displays the all class names globally.
+
+items[0].style.color='yellow';
+items[1].textContent='hello worlds';
+
+const listItems = document.querySelector('ul').getElementsByClassName('collection-item');
+
+console.log(listItems); --> displays the all class names which have select in ('ul') through querySelector.
+
+exapmle:
+HTMLCollection(5) [div.collection-item, li.collection-item, li.collection-item, li.collection-item, li.collection-item]
+0: div.collection-item -->globally className
+1: li.collection-item
+2: li.collection-item
+3: li.collection-item
+4: li.collection-item
+length: 5
+__proto__: HTMLCollection
+
+HTMLCollection(4) [li.collection-item, li.collection-item, li.collection-item, li.collection-item] -->here doesn't have global className.
+0: li.collection-item
+1: li.collection-item
+2: li.collection-item
+3: li.collection-item
+length: 4
+__proto__: HTMLCollection
+
+//document.getElementsByTagName 
+
+let lis = document.getElementsByTagName('li');
+
+console.log(lis); -->this shows all the TagName of list (example:li.collection-item, li.collection-item, li.collection-item, li.collection-item)
+
+lis[1].style.color='red';
+
+-- following HTML Collection converting into Array:
+
+let lis = document.getElementsByTagName('li');
+lis = Array.from(lis);
+ lis.reverse();
+
+lis.forEach(function(li,index){
+console.log(li);
+lis.textContent = `${index}:say hello`  -->this syntax denotes change the item name as say hello
+})
+
+console.log(lis);
+
+
+/*document.querySelectorAll() */
+
+const nope =document.querySelectorAll('ul.collection li.collection-item');
+
+nope.forEach(function(li , index){
+  
+  li.textContent = `${index}:computer`;
+})
+console.log(nope);
+
+In Console:-
+NodeList(4) [li.collection-item, li.collection-item, li.collection-item, li.collection-item]
+
+here In querySelectorAll results the NodeList.
+
+what is Diffence between HTML Collection and NodeList:-
+
+The most simplest answer is that both a NodeList and HTMLCollection are collections of DOM nodes. The difference is that while a NodeList can contain any node type, the HTMLCollection is going to only to contain any node Element.
+
+So what is the difference between a node element and a node type?
+
+Nodes: in the DOM, everything is a node and every node is an object. The name node is used as a generic term, for everything.
+
+Element: is one specific type of node. It can be a list item, a div, the body, the window, whatever, but its a specific type.
+
+Now we can see what the difference between a nodeList is and what a node element is:
+
+In the end, one is general and one is specific lists of nodes. It's important to know simply because you should know what you are returning and for more advanced JavaScript issues such as speed, in the case of static NodeLists vs Live NodeLists.
+
+//Odd and even 
+
+const liOdd =document.querySelectorAll('li:nth-child(odd)');
+
+const liEven = document.querySelectorAll('li:nth-child(even)');
+
+liOdd.forEach(function(li){
+  li.style.background='red';
+});
+
+liEven.forEach(function(li){
+  li.style.background= 'green';
+})
+
+	or (another way of for loop)
+
+for(let i=0;i<liEven.length;i++){ 
+  
+  liEven[i].style.background='green';
+}
+
+/*Traversing the DOM */
+
+let Val;
+
+const list = document.querySelector('ul.collection');
+
+const listChild = document.querySelector('li.collection-item:first-child');
+
+val = list.childNodes;
+console.log(val);
+
+console :-
+
+NodeList(13) [text, li.collection-item, text, li.collection-item, text, li.collection-item, text, li.collection-item, text, li.collection-item, text, li.collection-item, text]
+0: text
+1: li.collection-item
+2: text
+3: li.collection-item
+4: text
+5: li.collection-item
+6: text
+7: li.collection-item
+8: text
+9: li.collection-item
+10: text 
+11: li.collection-item
+12: text
+length: 13
+__proto__: NodeList
+
+Note:- In Above console text denotes the Line break of the li in ul.
+
+//Get Child Nodes
+
+val = list.childNodes;
+val =list.childNodes[0];
+val = list.childNodes[0].nodeType;
+val = list.childNodes[0].nodeName;
+
+1.Element
+2.Attribute (deprecated)
+3.Text node
+8.Comment
+9.Document itself
+10.Doctype
+
+when we add a any nodes in the code it displays in the console for child in NodeList and doesn't in the HTML Collection.
+so just know that child nodes gives us all different types of nodes not just elements, Children is going to give us just the Elements which is for the most part what we want we doing ,when we want in DOM.
+
+we are going to use children more than child nodes..
+
+//Get Children Element nodes
+
+val =list.children;
+val =list.children[2];
+list.children[1].textContent = 'red';
+
+//Children of children
+
+val = list.children[3].children[1];
+
+// First Child element
+val = list.firstChild; --> this shows #text 
+val = list.firstElementChild; --> this shows the first element of the child in list 
+
+//last Child element
+val = list.lastChild; --> this shows the #text
+val = list.lastElementChild; --> this shows the last element of the child in list
+
+//count child elements
+val = list.childElementCount; --> this shows the total count of child in list
+
+console.log(val)
+
+
+//Get Parent Node
+
+val = listChild.parentNode;
+val = listChild.parentNode.nodeType; 
+val = listChild.parentElement.parentElement; --> this whole div bcuz of it is parent node
+
+
+//get Siblings
+val = listChild.nextSibling; --> shows the #text
+val = listChild.nextElementSibling.nextElementSibling;
+
+//previous sibling
+val = listChild.previousSibling; -->Shows the Null bcuz here everytime the selector select the first element so previuos is not there so it will defined as null.
+val = listChild.previousElementSibling;
+console.log(val)
+
+Create an Element  :-
+----------------------
+Create an element and then add things to it such as Id's ,classes, attributes..create an element and insert into the DOM.
+/*Create a Element*/
+//create a element
+let li = document.createElement('li');
+//add a className to li
+li.className = 'collection-item';
+//add a id to li
+li.id='new-item';
+//add a attribute to li
+li.setAttribute('title','new-item');
+//add a append text
+li.appendChild(document.createTextNODE('NEW-ITEM'));
+//create a new  link element
+let link = document.createElement('a');
+//add a class to link element
+link.className=''delete-item secondary-content'';
+//add a icon
+link.innerHTML = '<i class="fa fa-times"></i>';
+//add a link to li
+li.appendChild(link);
+
+//add li as child to li
+document.querySelector('ul.collection').appendChild(li);
+
+console.log(li);
+
+/*Replace of a  Element*/
+
+//Create a Element
+const newHeadline = document.createElement('h2');
+
+//create a id 
+newHeadline.id="task-title";
+//add a textnode 
+newHeadline.appendChild(document.createTextNode('Task Lists'));
+
+//Get the Old Element
+const oldHeading = document.getElementById('task-title');
+
+//Parent Element
+const cardHeading = document.querySelector('.card-action'); --> this parent needs for where to change the task.
+
+//replace the element
+cardHeading.replaceChild(newHeadline,oldHeading);
+
+console.log(newHeadline);
+
+/*Removing the Element*/
+
+const lis = document.querySelectorAll('li'); --> create a variable for li elements
+const list = document.querySelector('ul'); --> create a variable for ul elements
+//Remove list item
+lis[0].remove(); --> remove the 1st item in the list 
+//remove Child element
+list.removeChild(lis[3]); -->remove the specific item in the list which is in 4rd postion bcuz item starts from 0.
+ 
+//classes & attribute
+
+const firstLi = document.querySelector('li:first-child'); create a variable and get the first 
+list item.
+ -now the element that i want to work with is actually 'a' tag ,the first li that gives us list item,so i want 'a' tag which is inside which is a child
+
+console.log(firstLi.children[0]); --> give the <a href="#" class='delete-item secondary-content'>List item</a>
+const link = firstLi.children[0]; -->so we gonna put this in a variable 
+
+//classes
+let val;
+val = link.className; -->i want a class Name which we used before (o/p:- delete-item secondary-content)
+val = link.classList;--> which gives a array list 
+val = link.classList[0]; --> we get delete-item 
+link.classList.add('test'); ->we gonna add the class to the specific item (<a href="#" class='delete-item secondary-content test'>List item</a>)
+link.classList.remove('test'); ->we can also remove the class to the specific item (<a href="#" class='delete-item secondary-content '>List item</a>)
+val = link;
+console.log(val);
+
+//Attributes
+val = link.getAttribute('href'); -->this shows the attribute of the li of tag 'a'.console:- #
+val = link.setAttribute('href','http://google.com'); --> when we click on list item then page is redirect to the googel home page.
+
+val = link.hasAttribute('href');--> this shows the attribute is present or not , console:- true.
+Link.setAttribute('title','google') --> this sets the title for the anchor tag 'a' to href
+val = Link.hasAttribute('title') --> this shows which has the attribute.
+Link.removeAttribute('title)-->this will remove the title of the attribute.
+val = Link
+console.log(val) --> <a href="http://google.com" class="delete-item secondary-content" title="google"></a>
+
+Event Listeners & Event Object:
+-------------------------------------
+
+Here we are going to apply a event listener on Clear Task button.
+
+so we use 
+	
+			 -> this is the class of the button
+			|		/->this is eventListener
+document.querySelector('.clear-task').addEventListener('click',function(){
+console.log('Hello World');				|-> this is a anonymous function or call back function.
+})
+
+--> when we want to do something in a function , the click action will listen a event and do on the clear-task button.
+
+as when we put href ="http://google.com" it will direct to google home page so aslong we have to make a prevent default
+
+document.querySelector('.clear-task').addEventListener("click",
+function(e){  -> here 'e' is the event Object
+
+e.preventDefault();  --> we can prevent this calling preventDefault() method which remains in same page and don't redirect to the previous page to google.
+console.log('hello world');
+})
+
+//named function
+document.querySelector('.clear-tasks').addEventListener('click',onClick)
+
+function onClick(e){
+let val ;
+val = e;
+// Event Target Element --(here we gonna target is represent the element that the event actually happened on this case)
+val = e.target;
+val = e.target.id;
+val = e.target.className; --> this shows the ClassName( clear-tasks btn black )
+val  = e.target.classList ; --> this shows the classList (DOMTokenList(3) ["clear-tasks", "btn", "black", value: "clear-tasks btn black"]
+0: "clear-tasks"
+1: "btn"
+2: "black"
+length: 3
+value: "clear-tasks btn black"
+__proto__: DOMTokenList )
+
+e.target.innerText = 'hello'; -->we can change the button text through the clear task to hello
+console.log(val);
+ console.log('hello world');
+}
+
+// Event Type 
+
+document.querySelector('.clear-tasks').addEventListener('mouseover',onClick)
+function onClick(e){
+let val ;
+val = e.type ;
+val = e.timeStamp ; --> this shows the timeStamp of the event type.
+console.log(val); --> mouseover becuz we use mouseover event for clear task button;
+}
+
+// coordinate event relative to the window
+  val = e.clientY;  --> this results the 'Y' coordinate of button of window 
+  val = e.clientX; --> this results the 'X' coordinate of button of the window
+
+  //coordinate event relative to the element
+  val = e.offsetY; --> this results the 'Y' coordinate of the button element
+  val = e.offsetX; --> this results the 'X' coordinate of the button element
+console.log(val);
+
+/*Mouse Events*/
+
+here we are going to create a variable of specific class for a mouse event
+
+const clearBtn = document.querySelector('.clear-tasks');
+const card = document.querySelector('card');
+const Heading = document.querySelector('h5');
+
+// click --> this shows for a click event
+clearBtn.addEventListener('click',runEvent);
+
+//double click
+clearBtn.addEventListener('dbclick',runEvent);
+
+//mouse Down  --> while click on button hold and then it fires out and displays in console EVENT TYPE : mousedown
+clearBtn.addEventListener('mousedown',runEvent);
+
+// mouseUp --> while click on button hold and remove then it fires off after releasing the button and displays in console EVENT TYPE : mouseup
+
+// mouseenter --> when curser enter into button then it results the console is EVENT TYPE:mouseenter
+clearBtn.addEventListener('mouseenter',runEvent);
+
+// mouseleave -->when curser enter into button then it results the console is EVENT TYPE:mouseleave
+ClearBtn.addEventListener('mouseleave',runEvent);
+
+// mouseover -->when curser enter into button then it results the console is EVENT TYPE:mouseover
+ClearBtn.addEventListener('mouseover',runEvent);
+
+// mouseout -->when curser enter into button then it results the console is EVENT TYPE:mouseout
+ClearBtn.addEventListener('mouseout',runEvent);
+
+Well the difference is if i go in and then i go over something else another element inside the card such as Clear tasks,we can see that mouse over and if i leave that we got mouse out. mouse over mouse out but mouse enter and mouse leave are not firing off those only fire off when we go into that. 
+The main element however mouse out and mouse over will fire off when u go into another element , inside of that element.
+Mouse Leave and mouse Out is only going to fire on the intial parent element..
+
+//mouse move  --> this result the count of mouse movement (it is mostly useed in game application)
+card.addEventListener('mousemove',rumEvent);
+
+function runEvent(e){
+	console.log(`EVENT TYPE : ${e.type}`);
+}
+
+
+//heading 
+i want to display the heading of cordinates of the mouse (Task heading)
+we have seen access E dot offset X and offset Y which gives us the coordinates of the mouse inside of elements.
+
+function runEvent(e){
+console.log(`EVENT TYPE : ${e.type}`);
+heading.textContent = `MouseX:${e.offsetX},MouseY:${e.offsetY}`; --> this shows where mouse coordinates are moving ,in game we can specifiy where character is moving
+document.body.style.backgroundcolor = `rgb(${e.offsetX},${e.offsetY},40)`; ->this hsow another method for look the background color.
+}
+
+KeyBoard &Input Event:-
+----------------------------
+
+const forms = document.querySelector('form');
+const taskInput = document.getElementById('task');
+const Heading = document.querySelector('h5');
+
+// clear Input in the box
+taskInput.value =' '; --> this value keep empty for input value bcuz we keep null value
+
+//forms.addEventListener('submit',runEvent); 
+
+taskInput.addEventListener('keyup',runEvent);
+
+function runEvent(e){
+  
+  console.log(`Event Type:${e.type}`)
+
+  // Get the Input Value --> we get the input value for below console
+  // console.log(taskInput.value);
+  console.log(e.target.value)
+  Heading.innerText = e.target.value;
+
+  e.preventDefault(); --> this is used to not to direct the page to another page.
+
+}
+
+Event Bubbling & Delegation :-
+-----------------------------------
+Event Bubbling is the bubbling up of events through the Dom.so when an event happens on a particular element in the Dom and actually will bubble up through its parent. 
+
+example for event Bubbling:
+
+/*Event Bubbling*/
+	document.querySelector('.card-title').addEventListener('click',function(){
+console.log('card title');
+}); 
+
+document.querySelector('.card-content').addEventListener('click',function(){
+  console.log('card content');
+  }); --> this .card-content is the parent of .card-title
+
+  document.querySelector('.card').addEventListener('click',function(){
+    console.log('card');
+    }); -->this .card is the parent of .card-content
+
+    document.querySelector('.col').addEventListener('click',function(){
+      console.log('col');
+    }); -->this .col is the parent of .card 
+
+output:-	card title
+   
+	card content
+  
+	card   
+	col  
+
+
+here when we click on Task List there all the events all of those fired off i didn't click on any of those but they fire off becuz of the event bubbling it bubbles up the dom.
+
+Event Delegation:
+--------------------
+
+/*event delegation*/
+ we putting the event Listener on a parent and then going down.
+so let's go a head and we know before we get into that let me show u what happen with out delegation.in this situation where we have all these delete item classes.
+
+ex:-
+
+const delItem = document.querySelector('.delete-item');
+delItem.addEventListener('click',deleteItem)
+
+function deleteItem(){
+  console.log('delete-item');
+}
+
+here we click on cancel to delete the list-item , in the console we get delete item.
+Now let's Reload the page and let's click on the next one no delete item Ok.none of these other ones are working. 
+Only First One is working,this is a situation where we need to use event delegation. write another situation where u need to use event delegation if u dynamically insert something into Dom through Javascript.
+
+For example if we insert a new list-Item that was not there when the page loaded then u also need to use event delegation.
+
+document.body.addEventListener('click',deleteItem); -->  instead of putting the event listener on them right onto delete item class ,we're going to choose a parent class ok and this could be anything.
+
+function deleteItem(e){
+console.log('delete-item');
+console.log(e.target);
+}  --> this function shows the i tag which is in the 'a' tag, instead of the showing the a tag element so, we need to get the parent element of 'i' tag.
+
+function deleteItem(e){
+if(e.target.parentElement.className === 'delete-item secondary content'){
+console.log('delete-item');
+console.log(e.target);
+}
+}
+
+--> here we need some conditional statement,we do couple ways to do it, e.target.className === ' fa fa-remove' ,when we click on the any where we does't get click on body , it clicks on the list item only.
+now we don't to deal with the icon that i want to deal with the tag around it which is its parent.So what i'm going to do say target.parentElement.className
+
+so when add test in class in below .
+<li class="collection-item">List Item
+                  <a href="#" class="delete-item secondary-content test">
+                    <i class="fa fa-times"></i>
+                  </a>
+                 </li>
+so when we add aditional 'test' to the class attribute "delete-item secondary-content test" then we can't get the last item when we click the last action .
+so we will use the classList to access all the class which containes ('delete-item').
+
+function deleteItem(e){
+if(e.target.parentElement.classList.contains('delete-item)){
+console.log('delete item);}
+}
+ 
+here we are going to delete the specific list item through parentelement bcuz there is the a tag which is linked to a parent
+
+ function deleteItem(e){
+if(e.target.parentElement.classList.contains('delete-item'){
+console.log('delete item);
+e.target.parentElement.parentElement.remove();
+}
+}
+
+The whole defination of event delegetion in simple term is just putting the listener on a paring of what ur looking for and then putting a condition in here to try to find the target. Ok using this e.target and then doing ur functionality there.
+
+Local & Session Storage: 
+----------------------------
+
+here we going to store the data in 2 ways 1. local storage and 2.session storage
+
+API with a bunch of methods such as get item,set item,remove Item.
+you can save Arrays and Objects and stuff you just have to turn them into a 'String' first using a method called 'Json.stringfy()' and then u pull it out to use it to Parse it back using a method called 'json.parse()'. 
+
+Difference between Local Storage & Session Storage :
+local storage will stay untill u manually clear it out in your settings or through your program and Session storage will Leave it'll go away once your browser is closed once the session ends. but other than that  the API is the exact same.
+
+//Set Local storage item
+localStorage.setItem('name','john'); --> this will get stored in local memory to look over this storage --> goto Application and look at local storage so will be shown name:john
+
+//Set Session storage item
+sessionStorage.setItem('name','lee'); --> this will get stored in browser memory to look over this storage --> goto Application and look at Session storage so will be shown name:lee.
+
+if we close the browser and open again this session storage will be disappear.local storage will be same as previous stored name.
+
+//remove from Storage
+localStorage.removeItem("name"); --> this will remove the key value pair from the local Storage.
+
+//get Item from local Storage
+localStorage.setItem('name','john');
+
+const name = localStorage.getItem('name');
+console.log(name);
+
+//clear local Storage
+localStorage.clear();
+
+By creating a new task we are gonna add them to it input field and shown in console.
+
+
+document.querySelector('form').addEventListener('submit',
+function(e){
+
+  const task = document.getElementById('task').value;
+  localStorage.setItem('task',task);
+  alert('task is done');
+  console.log(task);
+  e.preventDefault();
+
+})
+ 
+-By creating the a new name we can get only task in input field and it stores in local Storage .again when we get replaced so we can only store one(1) task at a time.
+- So to fix this we can do is Create an array of tasks and Store that as a String. 
+
+document.querySelector('form').addEventListener('submit',function(e){
+
+const task = document.getElementById('task').value;
+
+let tasks;  --> let tasks that initialize the tasks variable and we want to first pull out of the local Storage. in there or check to see if there's something in there if there is pull it out and add to it . If not just set tasks to an empty array and add to it.
+So lets do an if statement .
+
+if( localStorage.getItem('tasks') === null){  --> since this is going to be an array of tasks plural. if local Storage does get item tasks is equal to now that means there's nothing in, there for tasks So we're going to set tasks to an Empty array.
+	tasks =[]; 
+}else{ --> Else if there is something in there then we want to set that local variable tasks equal to whatever in there so we can a local storage.getItem('tasks').Now the issue here is this is going to be a string. So what we need  to do is parse this into Json or parses it to an object that we can use.
+-Well in this case it's actually not going to be an Object bcuz it's just storing one value an array.But usually u will store an array of Json objects.
+tasks = localStorage.getItem('tasks');
+}
+
+--> Now what we can do is push the task that's coming through the form on to this variable here (const task = document.getElementById('task').value;).
+
+tasks.push(task);
+--> we're going to set tasks to the tasks variable which now includes the new the new one we added. 
+localStorage.setItem('tasks',Json.stringify(tasks));
+
+--> But remember like i said it has too store strings so we need to wrap this task in Json.stringify.
+e.preventDefault();
+})
+
+const task = localStorage.getItem('tasks');
+
+task.forEach(function(task){
+console.log(task);
+})
+
+--> the above statement gets an error (task.forEach is not a  we need add the JSON.parse to the localStorage to avoid error
+
+const task = JSON.parse(localStorage.getItem('tasks));
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Constructor & 'this' key word:-
+
+Before going to Constructor we have know about the E6 classes, E6 classes are bascially are syntactic sugar or kind of a convenient syntax which gives u an easier way to write to Object oriented code.
+	here gonna create a object :
+	const person = {
+ 	 name:'brad',
+ 	 age : 30,
+ 	 place:'hyderabad'
+	}
+
+	console.log(person.name);
+
+that's an object literal in that fine for a lot of cases when u want to deal with just one object or one instance. But if u want to create a multiple instances of a certain type of Object then you're going to want to Create a Constructor.
+	And if ur going to want to get into prototypes and inheritance and all that king of stuff then you waant to learn about a constructors.
+	lets create a constructor of function or method:-
+//create a person Constructor (first letter should be capital for constructor class)
+ function Person(){
+	this.name = 'Brad';  --> this is a constructor and it has one property called name.
+
+	this one line of code we can instantiate a person object from this.ok now to instantiate an object we use the new keyword.
+
+const bull = new Person();
+
+console.log(bull);
+}
+output:- Person {name: "Brad"}(Person is the name of object and name is key brad is value)
+
+example :- 
+function Person(name){
+this.name = name;
+}
+const brad = new Person('Brad');
+const naik = new Person('Naik');
+
+console.log(brad); -->output:- Person {name: "Brad"}
+console.log(naik); -->output:- Person {name: "Naik"}
+
+Now this key word is very important in which this does is it refers to the current instance of the object. in the above example it pertains to the person that pertains to this.
+
+here gonna do some change:-
+example- function Person(name,dob){
+this.name = name;
+this.birthday = new Date(dob);
+}
+const naik = new Person('Naik','10-08-1991');
+console.log(naik);
+
+output:-Person {name: "Naik", birthday: Wed Aug 10 1991 00:00:00 GMT+0530 (India Standard Time)}
+
+-Now i want to Create a method on this constructor. A method is a function that's inside of an object.
+
+function Person(name,dob){
+this.name = name;
+this.birthday = new Date(dob);
+this.CalculateAge = function(){  --> this function is used to calculate the age.
+			--> here we are subtract first of all i'm going to subtract the get time method of the birthday from the today's date.
+
+we can use 'this' to access any  properties and methods within person.
+		      ^
+		      |
+const diff = Date.now() - this.birthday.getTime();
+const ageDate = new Date(diff);	--> we're going to call it age date and we're going to create a date from that diff that diff values will. so new use the date constructor. we gonna pass 'diff' in method.
+
+reutrn Math.abs(ageDate.getUTCFullYear() - 1970) ; --> reutrn the ageDate,so we want to call that method which gives us the yeat in the specific date according to the universal.And then from there we just want to subtract from it.
+--> now i just want to wrap this in math.abs for absoulte just to make sure it's an absolute number.
+}
+}
+============================
+Build in Constructor:-
+-------------------------
+// String:
+const name1 = 'jeff';
+const name2 = new String('jeff');
+
+console.log(name2);
+output:- String {"jeff"}
+	0: "j"
+	1: "e"
+	2: "f"
+	3: "f"
+	length: 4
+	__proto__: String
+	[[PrimitiveValue]]: "jeff"
+
+-> we got string as an object in the above console, it gives us the primitiveValue is the Key and jeff as the value. And it gives us the each letter of the Of the string or each character of the string.
+
+Now one thing we can do when we use an object is we can add properties to it.for instance we could say name to dot foo equals to bar and save (name2.foo = 'bar';)
+
+//name2.foo = 'bar';
+
+-> in console we get foo: "bar";
+console.log (typeof name2);
+
+if(name1 === ''jeff''){
+console.log('yes');
+}else{
+console.log('No');
+}
+
+in console we get yes bcuz its a string ;
+
+Now Lets change the name1 to name2 we get :
+if(name2 === ''jeff''){
+console.log('yes');
+}else{
+console.log('No');
+}
+
+-In console we get 'No' , And the reason for this is bcuz we're checking to see if the value is jeff which it is named to the value itself is jeff but the type is not equal to a string.
+-Now if this we change to double equal sign (==) , then we'll get yes bcuz it's just checking the value of jeff.it's not checking the string type which that's what it is when it's surrounded in quotes.
+
+/*Other Constructor examples*/
+
+
+//number
+const num1 = 5;
+const num2 = new Number(5);
+
+console.log(typeof num2);
+
+//Boolean
+const bool1 =  false;
+const bool2 = new Boolean(true);
+
+console.log(typeof bool2);
+
+//function
+const getSum = function(x,y){
+  return x+y;
+}
+
+const getSum2 =  new Function('x','y','return 1+2')
+
+console.log(getSum2(1+2));
+//object
+const john1 = {name:'john'}
+const john2 = new Object({name:'lee'});
+console.log(john2);
+
+//array
+const arr1 = [1,2,3,4];
+const arr2 = new Array(1,2,3,4);
+console.log(arr2);
+
+//regular Expression
+
+if we want to create a regular expression what we would do is wrap it in two forward slashes and do put a backslash w which represents a word character and then we gonna put plus(+) -> this plus expression means that we are looking for a word character that is occurs one or more times
+const rel1 =  /\w+/;
+const rel2 =  new RegExp('\w+');
+
+console.log(rel2);
+--> when we use RegExp like this u actually have to escape here Characters like bag like slashes and you escape with a backslash ,so we would actually have to do this.
+const rel2 = new RegExp('\\w+'); --> for getting console (/\w+\)
+
+
+NOTE :- i could sugguest to know creating ur primitive values as u normally would,The arrays and objects and so on i mean it's not going to really hurt u but it does 'slow things down the excution time will be a little slower. So u generally want to stay away from this kind of things new Object, new Array and stick to this method .
+
+Prototypes Explained:-
+================
+Now Each Object in JavaScript has a prototype , and a Prototype is an Object itself.All Objects inherit their properties and methods from their prototype.
+
+when we're dealing with objects that were created through a constructor like for instance the person.
+example:-
+
+function Person(firstname,lastname,dob){
+  this.firstname = firstname;
+  this.lastname = lastname;
+  // this.age = age;
+  this.birthday = new Date(dob);
+  this.calculateAge = function(){
+    const diff = Date.now() - this.birthday.getTime();
+    const ageDate = new Date(diff);
+    return Math.abs(ageDate.getUTCDate() - 1970);
+  }
+	
+}
+
+now lets instantiate a new Person by just new keyword for refference of Person,  
+
+const jjj = new Person('jenny,'lee','march 20 1999');
+console.log(jjj);
+
+output:-
+Person {firstname: "jenny", lastname: "lee", birthday: Sat Mar 20 1999 00:00:00 GMT+0530 (India Standard Time), calculateAge: ƒ}
+
+here there is a _proto_
+	Person {firstname: "marry", lastname: "lee", birthday: Sat Mar 20 1999 		00:00:00 GMT+0530 (India Standard Time), calculateAge: ƒ}
+	firstname: "marry"
+	lastname: "lee"
+	birthday: Sat Mar 20 1999 00:00:00 GMT+0530 (India Standard Time) {}
+	calculateAge: ƒ ()
+	__proto__:
+	constructor: ƒ Person(firstname,lastname,dob)
+	__proto__: Object
+
+this represents object.prototype. which has its own property and method(hasOwnProperty()) which return a boolean.
+
+Lets Calcualte Age in prototype
+
+Ex:-
+//calculate Age
+
+Person.prototype.calculateAge = function(){ 
+const diff = Date.now() - this.birthday.getTim();
+const ageDate = new DATE(diff);
+return Math.abs(ageDate.getUTCFullYear()-1970);  
+ }
+
+const john = new Person('jenny','miller','10 august 1991');
+console.log(john.calculateAge());
+output:-28
+
+//get full name
+	Person.prototype.getFullName = function(){
+ 	 return `${this.firstname} ${this.lastname}`
+	}
+
+//gets married
+	Person.prototype.getsMarried = function(newLastName){
+	this.lastname = newLastName;
+
+	}
+const john = new Person("jenny","buff","10-08-1991");
+const mary = new Person('marry','lee','march 20 1999');
+
+console.log(mary);
+console.log(john.calculateAge());
+
+console.log(mary.getFullName()); --> output :- marry lee
+mary.getsMarried('smith'); --> this return the function and changes the lastname.
+console.log(mary.getFullName()); --> output :- marry smith
+
+console.log(mary.hasOwnProperty('firstname')); --> output - true;
+
+----------------------------------------------------
+/*ProtoType inheritence*/
+
+so what if we want to have one object or one Object type inherit from another.
+so i want to create a Person Object again and then have a Customer object that will inherit its prototype. 
+
+// create a person Constructor
+ function Person(firstname,lastname){ 
+  this.firstname = firstname;
+  this.lastname = lastname;
+
+ }
+
+ // creata a prototype method Greeting
+ Person.prototype.greeting = function(){
+
+  return `hello there ${this.firstname} ${this.lastname}`
+ }
+
+ // create a person object by new key word
+ const person1 =  new Person('smash','dill');
+
+ //console.log(person1.greeting());
+
+ //create a customer constructor
+ function Customer(firstname,lastname,phone,membership){
+  Person.call(this,firstname,lastname); --> call is a function that allow us to call another function from somewhere else in current context.
+the first parameter is 'this' then after 'firstname','lastname'.
+this.phone = phone;
+this.membership = membership;
+
+ }
+
+// Inherit the Person prototype method
+Customer.prototype = Object.create(Person.prototype);
+
+//make customer.prototype return customer()
+Customer.prototype.constructor =Customer;
+
+
+const customer1 = new Customer('tom','smith','988-888-888','Standard');
+console.log(customer1);
+
+//create a customer greeting
+ Customer.prototype.greeting = function(){
+  return `hello there ${this.firstname} ${this.lastname} welcome to our company`
+ }
+
+
+console.log(customer1.greeting()); output:-Uncaught TypeError: customer1.greeting is not a function, so we need to add couple of code line in above i.e iherit the person prototype method,make customer.prototype return customer(),create a customer greeting.
+
+------
+/*Using Object.create*/
+here we are going to show u another way to create objects using something called object.create
+we're going to be able to create prototypes inside of a kind of parent object and then having different properties with different methods or different prototype functions.
+
+const personPrototype ={ -->creata a variable called personprototype,this will be Object
+	greeting : function(){--> this will a prototype method called greeting ,and 		set to a function
+
+	return `hello there ${this.firstName} ${this.lastName}` -->return put a 		simple literal back ticks
+	},
+	getMarried : function(newLastName){
+	this.lastName = newLastName;
+	}
+
+}
+ const mary = Object.create(personPrototype); ->create a Object mary  wich takes the Object.create and pass prototype as personPrototype.
+
+mary.firstName = 'mary'; --> we can add properties to the Mary Object
+mary.lastName = 'wills';
+mary.age = 30;
+mary.getMarried('thompson')
+console.log(mary);
+
+this is a easy way to do it but we're not using a constructor and we're not getting into u know hardcore inheritance and stuff like that,but lets go ahead and add another prototype method 'getMarried'
+
+const brad = Object.create(personPrototype,{
+  firstName:{value:'brad'},
+  lastName:{value:'traversy'},
+  age : {value:'36'}
+})
+
+console.log(brad);
+
+console.log(brad.greeting());
+
+the another way to create a object variable is above example of const brad, which takes Object.create has parameter personPrototype and takes another object which has firstName object takes the key value pair as value:'brad' , same as lastName.
+-------
+/* ES6 Classes*/
+
+//create a class 
+class Person{
+	constructor(firstName,lastName){
+	this.firstName = firstName;
+	this.lastName = lastName;
+	}
+ greeting(){
+	return `Hello there ${this.firstName} ${this.lastName}` 
+	}
+	}
+  calculateAge(){
+    	const diff = Date.now() - this.birthday.getTime();
+   	 const ageDate =new Date(diff);
+   	 return Math.abs(ageDate.getUTCFullYear()- 1970);
+ 	 }
+  getsMarried(newLastName){
+    	this.lastName = newLastName;
+  	}
+}
+
+
+const mary = new Person('wills','lee');
+mary.getsMarried('lee');
+console.log(mary);
+
+all right so any method we add inside the class is actually going to get added to the prototype.
+as well as CalculateAge and getsMarried to..
+
+Now last thing is take a look at is static methods now a static method is one that u can use with Out instantiating an object.
+
+
+------------------------------------------------------------------------------------------------
+AJAX  & JSON:
+
+XMLHttpRequest Object Methods:-
+
+Method			Description
+new XMLHttpRequest()	->Creates a new XMLHttpRequest object
+abort()	->Cancels the current request
+getAllResponseHeaders()	->Returns header information
+getResponseHeader()	->Returns specific header information
+open(method, url, async, user, psw)	->Specifies the request
+
+method: the request type GET or POST
+url: the file location
+async: true (asynchronous) or false (synchronous)
+user: optional user name
+psw: optional password
+send()	->Sends the request to the server
+Used for GET requests
+send(string)	->Sends the request to the server.
+Used for POST requests
+setRequestHeader()	->Adds a label/value pair to the header to be sent.
+
+XMLHttpRequest Object Properties:-
+
+Property		Description
+onreadystatechange	Defines a function to be called when the readyState property changes
+readyState		Holds the status of the XMLHttpRequest.
+		0: request not initialized
+		1: server connection established
+		2: request received
+		3: processing request
+		4: request finished and response is ready
+responseText	Returns the response data as a string
+responseXML	Returns the response data as XML data
+status		Returns the status-number of a request
+		200: "OK"
+		403: "Forbidden"
+		404: "Not Found"
+For a complete list go to the Http Messages Reference
+statusText		Returns the status-text (e.g. "OK" or "Not Found")
+
+
+ create a button in html file (index.html)
+
+<button id="getData">GET Data</button>
+
+create a plain Text file(data.txt)
+some text is plain
+
+create a js file (app.js)
+
+document.getElementById('getData').addEventListener('click',loadData);
+
+function loadData(){
+//create a XHR Object
+const xhr = new XMLHttpRequest(); -> create a variable which we instatiate with new object ,just like we could use any constructor for any object.and we gonna say XMLHttpRequest();
+
+//Open --> open is bascially where we're going to specify the type of request we want to make.
+
+xhr.open('GET','data.txt',true); -> first we're going to call it open and first parameter will be the type of request and then file that we want to make ' GET ' request and next paramter isfile/Url we make and third parameter we make is Asynchronous i.e true or false.
+//Optional - Used for spinner/loaders
+xhr.onprogress = function(){
+console.log('READYSTATE',xhr.readystate);
+}
+
+next we want to call xhr.onload and we want to actually set to a function.then here we want to do whatever it is need to do with the data.
+xhr.onload = function(){
+if(this.status === 200){ -> we just do a check first to make sure that the status == 200,bcuz in http status 200 mean everything went well.
+Note:- ajax and xhr is more complicated then fetch,fetch the newer standard and we'll get into that later.
+console.log(this.responseText); -> this is another property we can access called responseText.
+}
+}
+
+xhr.onerror = function(){ -> onerror method is used when something went wrong.
+console.log('Request Error');
+}
+ xhr.send();
+}
+
+so we have readystate change ,we have check the ready state change and then get into the httprequest method,
+
+ex:
+xhr.onreadystatechange = function(){
+console.log('READYSTATE',xhr.readystate) --> first we have to check this when we using methods
+if(this.status === 200 && this.readyState === 4){
+console.log(this.responseText)}
+}
+
+

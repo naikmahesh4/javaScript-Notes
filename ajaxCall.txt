@@ -1,0 +1,730 @@
+Ajax:
+
+index.html:
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <title>Ajax SandBox</title>
+</head>
+<body>
+  <div class="container">
+    <button id="button1">Get Customer</button>
+    <button id="button2">Get Customers</button>
+    <br><br><br>
+    <h1>Customer</h1>
+    <div id="customer"></div>
+    <h1>Customers</h1>
+    <div id="customers"></div>
+  </div>
+
+  <script src="app.js"></script>
+  
+</body>
+</html>
+
+customer.json:
+---------------
+{
+  "id" : 1,
+  "name" : "john deo",
+  "company" : "123 Designs",
+  "phone" : "444-555-6666"
+  }
+
+customers.json:
+------------------
+[
+  {
+  "id" : 1,
+  "name" : "john deo",
+  "company" : "123 Designs",
+  "phone" : "444-555-6666"
+ },
+{
+  "id" : 2,
+  "name" : "michle deo",
+  "company" : "567 Designs",
+  "phone" : "444-555-6666"
+  },
+{
+  "id" : 3,
+  "name" : "Smith lee",
+  "company" : "sony Productions",
+  "phone" : "444-555-6666"
+ },
+{
+  "id" : 4,
+  "name" : "redmi ",
+  "company" : "MI productions",
+  "phone" : "444-555-6666"
+ }
+]
+
+app.js:
+--------
+document.getElementById('button1').addEventListener('click',loadCustomer);
+
+document.getElementById('button2').addEventListener('click',loadCustomers);
+//load Customer
+function loadCustomer(e){
+  
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET','customer.json',true);
+
+    xhr.onload = function(){
+
+      if(this.status === 200){
+        // console.log(this.responseText);
+        const customer = JSON.parse(this.responseText); ->we need to parse this as JSON,it as an object. the reason is bcuz a json string so to get instance customer. to do in Json Parse.  
+
+        const output = `
+        <ul>
+        <li>ID: ${customer.id}</li>
+        <li>Name: ${customer.name}</li>
+        <li>Company: ${customer.company}</li>
+        <li>Phone: ${customer.phone}</li>
+        </ul>
+        `;
+
+        document.getElementById('customer').innerHTML = output;
+
+
+      }
+    }
+  xhr.send();
+
+  e.preventDefault();
+}
+
+//loadCustomers
+function loadCustomers(e){
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET','customers.json',true);
+
+  xhr.onload = function(){
+
+    if(this.status === 200){
+
+      const customers = JSON.parse(this.responseText);
+      
+      let output = ' ';
+
+      customers.forEach(function(customers){ -> we have an array in json so we can't output it so we need to loop through it.
+        output += `  --> we're going use plus for append equals, if we equals going to to overwrite this.and then each iteration it'll append that new customer onto output. 
+        <ul>
+        <li>ID: ${customers.id}</li>
+        <li>Name: ${customers.name}</li>
+        <li>Company: ${customers.company}</li>
+        <li>Phone: ${customers.phone}</li>
+        </ul>
+        `;
+      });
+
+      document.getElementById('customers').innerHTML = output;
+    }
+    
+  }
+
+  xhr.send();
+  e.preventDefault();
+}
+
+------------------------------
+REST APIs & HTTP Request ;-
+
+Application Programming Interface ;-
+* Contract provided by one piece of software to another
+*Structured request and response
+*we just worked with an API that takes a request and response with jokes in previous task.
+
+Representational State Transfer:-
+*Architecture style for desigining networked applications
+*Relies on a statless,client-server protocol,almost always HTTP
+*Treats server objects as resources that can be created or destroyed
+*can be used by virtually any programming language
+*All APis have their own rules and structure
+
+
+HTTP Request ;-
+
+1) GET : Retrieve data from a specific resource
+2) POST: Submit data to be processed to a specific resource
+3)PUT: Update a Specific resource
+3)DELETE: Delete a specific resource
+
+-> HEAD:Same as get but does not return a body
+->OPTIONS : Returns the support HTTP methods
+-> PATCH:Update partial resources
+
+API Endpoints:-
+
+GET -- https://someurl.com/api/users 	//Get all users
+GET --https://someurl.com/api/ussers/1	//Get single user
+POST --https://someurl.com/api/users	//Add User
+PUT --https://someurl.com/api/users/1	//Update user
+DELETE --https://someurl.com/api/users/1	//Delete user
+
+-------------------------
+Callback Function :-
+
+we've deal with callbacks quite a bit already,call back is simply a function that's passed in as a parameter to another function and then it's ran inside the function body.
+whenever we did a forEach on an array when we do array forEach and then we pass in function,That's actually a callback.
+Now that particular callback is not a synchronous meaning that it doesn't or does stop anything else from happening untill it's done.
+we have synchronous and they synchronous callbacks.Another Example is set time out which views quite a bit. that takes in a callback function which actually is a synchronous
+
+ example:-
+index.html file:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Callback Function</title>
+</head>
+<body>
+  
+  <script src="callback.js"></script>
+</body>
+</html>
+
+app.js ;-
+const posts =[
+  {title:'Post One',body:'This is post One'},
+  {title:'Post Two',body:'This is post Two'},
+]
+// function createPost(post){
+//   setTimeout(function(){
+//     posts.push(post)
+//   },6000);
+// }
+
+// function getPosts(){
+//   setTimeout(function(){
+//     let output = '';
+//     posts.forEach(function(post){
+//       output +=`
+//       <li>${post.title}</li>`
+//     });
+//     document.body.innerHTML = output;
+//   },1000)
+// }
+
+// createPost({title:'post Three',body:'this is post Three'});
+
+// getPosts();
+
+function createPost(post, callback){ --> here we're including the callback parameter 
+  setTimeout(function(){
+    posts.push(post);
+    callback(); --> here we added on the post and we want to call this function
+  },2000)
+}
+
+function getPosts(){
+  setTimeout(function(){
+    let output = '';
+    posts.forEach(function(post){
+      output += `
+      <li>${post.title}</li>`
+    },1000);
+    document.body.innerHTML = output;
+  })
+}
+
+createPost({title:'Post Three',body:'this is post Three'},
+getPosts); -> this takes in our post which is the object here but it also takes in a callback function,we can pass in as function 'getPosts'.
+
+So what happen is when Create post is called it'll call get post (in callback()),Before the server actually ends in 2 seconds oe within 2 seconds.
+
+=============================================================
+Custom Http Library(Ajax with Callbacks)-
+
+index.html:-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EasyHTTP Example</title>
+</head>
+<body>
+  <h1>EasyHTTP Example</h1>
+  <script src="easyHttp.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+easyHTTP.js :-
+function easyHTTP(){
+  this.http = new XMLHttpRequest();
+}
+
+//Make an HTTP GET Request
+easyHTTP.prototype.get = function(url){
+  this.http.open('GET',url,true);
+  
+  this.http.onload = function(){
+    if(this.http.status === 200){
+      console.log(this.http.responseText); --> here we get console Uncaught TypeError: Cannot read property 'status' of undefined
+ at XMLHttpRequest.http.onload 
+
+here we haven't talked about arrow functions yet which are a part of ES6 and arrow function fix this by adding, a called 'lexical'.if we use arrow function it works.
+
+So a common way to fix this in ES5 with out using arrow functions is to set another variable such as self. so that we can capture that this in this scope and then down here instand of saying this.
+ 
+ the below code shows for self ;-
+
+	[ easyHTTP.prototype.get = function(url ,callback){ --> here we're using callback function
+  	this.http.open('GET',url,true);
+  
+  	let self = this;
+  	this.http.onload = function(){
+    	if(self.http.status === 200){
+      	callback(null,self.http.responseText); -> null is used for a error 
+    	}else{
+	callback('Error : '+self.http.status) ->we get concatinate error it will show 404 status.
+	}
+  	}
+
+	  this.http.send();
+	}  ]
+
+    }
+  }
+
+  this.http.send();
+}
+
+//make a HTTP Post Request
+
+easyHTTP.prototype.post = function(url, data, callback){
+
+  this.http.open('POST',url,true);
+
+this.http.setRequestHeader('Content-type') ->but in addition to thaat we need to set the content type and do Http Headers and setRequestHeader which has Content-type andwe want to set it to value of a slash JSOn.
+let self = this;
+this.http.onload = function(){
+callback(null,self.http.responseText);
+}
+
+  this.http.send(JSON.stringify(data)); -->  here you goind to sending data,and this could be a regular javascript object when we pass it in. so we need to run it through a function called JSON.Stringify().and pass the data
+
+}
+
+	//make an HTTP PUT Request
+	easyHTTP.prototype.put =  function(url, data, callback){
+	this.http.open('PUT',url,true);
+	
+	this.http.setRequestHeader('Content-type','application/json');
+	
+	this.http.onload = function(){
+	callback(null,this.http.responseText)
+	}
+
+	this.http.send(JSON.Stringify(data));
+	}
+
+	//Make an HTTP DELETE Request
+	easyHTTP.prototype.delete = function(url, callback){
+	this.http.open('DELETE',url,true);
+	let self = this;
+	this.http.onload = function(){
+	if(self.http.status === 200){
+	callback(null, 'POST DELETED')
+	}else{
+	callback('ERROR :' + self.http.status);
+	}
+	}
+
+	this.http.send();
+	}	
+
+app.js:-
+const http = new easyHTTP;
+
+//Get posts
+http.get('http://jsonplaceholder.typicode.com/posts',
+function(err,posts){
+if(err){
+console.log(err) 
+}else{
+console.log(posts);
+}
+});
+
+//for POST 
+
+	//create Data
+	const data = {
+	title:'this is a custom',
+	body:'this is a custom body'
+	}
+	//create Post
+	http.post('http://jsonplaceholder.typicode.com/posts',data,function(err,post){
+	if(err){
+	console.log(err);
+	}else{
+	console.log(post);
+	}
+	});
+
+//PUT
+	
+	//create Data
+	const data = {
+	title:'this is a custom',
+	body:'this is a custom body'
+	}
+	//Update Data
+	http.put(''http://jsonplaceholder.typicode.com/posts',data,function(err,post){
+	if(err){
+	console.log(err);
+	}else{
+	console.log(post);
+	}
+	});
+//Delete	
+	//create Data
+	const data = {
+	title:'this is a custom',
+	body:'this is a custom body'
+	}
+	//Delete Data
+	http.delete('http://jsonplaceholder.typicode.com/posts',
+	function(err,posts){
+	if(err){
+	console.log(err)
+	}else{
+	console.log(posts);
+	}
+	})
+=============================================
+ES6 Promises :- (Url:-https://www.geeksforgeeks.org/javascript-promises/)
+--------------
+Promises are used to handle asynchronous operations in JavaScript. They are easy to manage when dealing with multiple asynchronous operations where callbacks can create callback hell leading to unmanageable code.
+
+Prior to promises events and callback functions were used but they had limited functionalities and created unmanageable code.
+Multiple callback functions would create callback hell that leads to unmanageable code.
+Events were not good at handling asynchronous operations.
+
+Promises are the ideal choice for handling asynchronous operations in the simplest manner. They can handle multiple asynchronous operations easily and provide better error handling than callbacks and events.
+
+Benefits of Promises:
+1.Improves Code Readability
+2.Better handling of asynchronous operations
+3.Better flow of control definition in asynchronous logic
+4.Better Error Handling
+A Promise has four states:
+-fulfilled: Action related to the promise succeeded
+-rejected: Action related to the promise failed
+-pending: Promise is still pending i.e not fulfilled or rejected yet
+-settled: Promise has fulfilled or rejected
+A promise can be created using Promise constructor.
+Syntax
+
+var promise = new Promise(function(resolve, reject){
+     //do something
+});
+
+Parameters:-
+->Promise constructor takes only one argument,a callback function.
+->Callback function takes two arguments, resolve and reject
+->Perform operations inside the callback function and if everything went well then call resolve.
+->If desired operations do not go well then call reject.
+
+Example
+var promise = new Promise(function(resolve, reject) { 
+const x = "geeksforgeeks"; 
+const y = "geeksforgeeks"
+if(x === y) { 
+	resolve(); 
+} else { 
+	reject(); 
+} 
+}); 
+
+promise.then(function () { 
+		console.log('Success, You are a GEEK'); 
+		}). 
+	catch(function () { 
+		console.log('Some error has occured'); 
+	}); 
+
+output :
+Success,you are a GEEK
+
+Promise Consumers:-
+
+Promises can be consumed by registering functions using .then and .catch methods.
+
+1.then():-
+	then() is invoked when a promise is either resolved or rejected.
+Parameters:
+	then() method takes two functions as parameters.
+
+ 	1.First function is executed if promise is resolved and a result is received.
+	2.Second function is executed if promise is rejected and an error is received. (It is optional and there is a better way to hanlde error using .catch() method
+
+Syntax:
+.then(function(result){
+        //handle success
+    }, function(error){
+        //handle error
+    })
+
+Example: Promise Resolved
+var promise = new Promise(function(resolve, reject) { 
+	resolve('Geeks For Geeks'); 
+}) 
+
+promise.then(function(successMessage){ 
+	//success handler function is invoked 
+		console.log(successMessage); 
+	}, function(errorMessage) { 
+		console.log(errorMessage); 
+	}) 
+output:Geeks For Geeks
+
+Examples: Promise Rejected
+var promise = new Promise(function(resolve, reject) { 
+	reject('Promise Rejected') 
+}) 
+
+promise.then(function(successMessage) { 
+		console.log(successMessage); 
+	}, function(errorMessage) { 
+	//error handler function is invoked 
+		console.log(errorMessage); 
+	}) 
+output:Promise Rejected
+
+2.catch()
+	catch() is invoked when a promise is either rejected or some error has occured in execution.
+Parameters:
+	catch() method takes one function as parameter.
+	Function to handle errors or promise rejections.(.catch() method internally calls .then(null, errorHandler), i.e. .catch() is just a shorthand for .then(null, 	errorHandler) )
+Syntax:
+
+.catch(function(error){
+        //handle error
+    })
+
+Examples: Promise Rejected
+	var promise = new Promise(function(resolve, reject) { 
+	reject('Promise Rejected') 
+	}) 
+
+promise.then(function(successMessage) { 
+		console.log(successMessage); 
+	}) 
+	.catch(function(errorMessage) { 
+	//error handler function is invoked 
+		console.log(errorMessage); 
+	}); 
+output:- Promise Rejected
+
+Examples: Promise Rejected
+	var promise = new Promise(function(resolve, reject) { 
+	throw new Error('Some error has occured') 
+}) 
+
+promise.then(function(successMessage) { 
+		console.log(successMessage); 
+	}) 
+	.catch(function(errorMessage) { 
+	//error handler function is invoked 
+		console.log(errorMessage); 
+	}); 
+output:-Error: Some error has occured
+
+Applications:-
+1.Promises are used for asynchronous handling of events.
+2.Promises are used to handle asynchronous http requests.
+
+----------------------------------------------------------------------------
+promises:-
+
+index.html:-
+-------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Callback Function</title>
+</head>
+<body>
+  
+  <script src="callback.js"></script>
+</body>
+</html>
+
+app.js (.then()) :-
+-----
+const posts = [
+{title:'Post One',body:'This is post One'},
+  {title:'Post Two',body:'This is post Two'},
+]
+function createPost(post){
+return new Promise(function(resolve,reject){
+	setTimeout(function(){
+	posts.push(post);
+	resolve();
+	},2000)
+	})
+}
+
+function getPosts(){
+	setTimeout(function(){
+	let output = ' ';
+	posts.forEach( function(post){
+	output += `
+	<li>${post.title}</li>
+	},1000);
+	document.body.innerHTML = output;
+	})
+}
+
+createPost({title:'Post Three',body:'this is post Three'}).then(getPosts);
+
+app.js (.catch()) :-
+-----
+const posts = [
+{title:'Post One',body:'This is post One'},
+  {title:'Post Two',body:'This is post Two'},
+]
+function createPost(post){
+return new Promise(function(resolve,reject){
+	setTimeout(function(){
+	posts.push(post);
+	const error = true;
+	if(!error){
+	    resolve();
+	}else{
+	    reject('ERROR : Something went wrong');
+	}
+	},2000)
+	})
+}
+
+function getPosts(){
+	setTimeout(function(){
+	let output = ' ';
+	posts.forEach( function(post){
+	output += `
+	<li>${post.title}</li>
+	},1000);
+	document.body.innerHTML = output;
+	})
+}
+
+createPost({title:'Post Three',body:'this is post Three'})
+.then(getPosts)
+.catch(function(err){
+console.log(err);
+ });
+=-------------------------------------------------
+Fetch API :-
+
+The Fetch API provides a fetch() method defined on the window object, which you can use to perform requests. This method returns a Promise that you can use to retrieve the response of the request.
+
+example:-
+ index.html:-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <title>Fetch API Sandbox</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Fetch API Sandbox</h1>
+    <button id="button1" class="btn btn-primary">GET TEXT</button>
+    <button id="button2">GET JOBS</button>
+    <button id="button3">GET API DATA</button>
+    <br><br>
+    <div id="output"></div>
+  </div>
+
+  <script src="app.js"></script>
+ 
+</body>
+</html>
+
+test.txt:-
+
+This is a Simple Test.
+
+posts.json:-
+
+
+app.js:-
+
+document.getElementById('button1').addEventListener('click',getText);
+document.getElementById('button1').addEventListener('click',getJson); -> to get Json
+document.getElementById('button3').addEventListener('click',getExternalAPI); -> to get ExternalAPI
+
+//Get the Text File Data
+function getText(){
+	fetch('test.txt') -> we need fetch method here and passing the test.txt ,Fetch returns promises and to get a response from a promise we have to use .then
+	.then( function(res){ 
+	return res.text(); -> we as go to inspect elements we have promise that gives a response and we need a text() to get response.now return this res.text();
+	})
+	.then( function(data){ -> now again let's call another .then() becuz that res.text() returns a promise.and pass a function which needs the data in it
+	console.log(data);
+	document.getElementById('output').innerHTML = data ; -> to display in browser.
+	})
+	.catch(function(err){ -> for error/reject message we use .catch() 
+	console.log(err)
+	})
+	}
+//Get the Jon Data
+function getJson(){
+	fetch('posts.json')
+	.then(function(res){
+	return res.json();
+	}).then(function(data){
+	console.log(data);
+	let output = ' ' ;
+	data.forEach(function(post){ -> here we habe to loop the data from an array.
+	output += `<li>${post.title}</li>`
+	document.getElementById('ouput').innerHTML = output;
+	});
+	})
+	.catch(function(err){
+	console.log(err);
+	})
+}
+
+//Get Data From External API
+function getExternalAPI(){
+  fetch('https://api.github.com/users')
+  .then(function(res){
+    return res.json();
+     
+  })
+   .then(function(data){
+       let output = '';
+     data.forEach(function(user){
+       output += `<li>${user.login}</li>`
+     });
+     document.getElementById('output').innerHTML = output;
+   })
+   .catch(function(err){
+     console.log(err);
+   })
+}
