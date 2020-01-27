@@ -1,0 +1,17 @@
+Arrow Function:-
+
+Arrow functions – also called “fat arrow” functions, from CoffeeScript (a transcompiled language) — are a more concise syntax for writing function expressions. They utilize a new token, =>, that looks like a fat arrow. Arrow functions are anonymous and change the way this binds in functions.
+
+app.js:-
+---
+const sayHello = function(){
+	console.log('say Hello');
+	}
+sayHello();
+
+const sayHello = () => { --)first here we don't need a function keyword,so parenthesis is empty and curly braces in between both we need to put a arrow which is an equal sign and a greater than sign.
+ 	console.log('hello')
+	}
+sayHello(); 
+
+ouput: Hello
