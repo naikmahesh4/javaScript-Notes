@@ -210,3 +210,93 @@ return data;
 
 }
 getUsers().then(users => console.log(users)); 
+
+--------------------------------------------------------
+
+
+Custom EasyHTTP Library (Fetch with Aysnc & Await) :-
+
+index.html:-
+<title>Custom HTTP aysnc & await</title>
+<head></head>
+<body>
+<script src="easyHTTp3.js"></script>
+<script src="app.js"></script>
+</body>
+
+easyHTTP3.js:-
+
+
+class EasyHTTP{
+
+  async get(url){
+    const response = await fetch(url)
+
+    const userData =  await response.json();
+
+    return userData;
+  }
+  
+  async post(url, data){
+    const response = await fetch(url ,{
+      method : 'POST',
+      headers:{'Content-type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    const resData = await response.json();
+    return resData;
+  }
+
+  async put(url,data){
+    const response = await fetch(url ,{
+      method:'PUT',
+      headers: {
+      'Content-type':'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    const resData = await response.json()
+
+    return resData ;
+  }
+  async delete(url){
+    const response = await fetch(url,{
+      method:'DELETE',
+      headers:{'Content-type' : 'application/json'}
+    })
+    const userData = await 'Resource Deleted';
+    return userData;
+  }
+}
+
+app.js :-
+
+const http = new EasyHTTP;
+
+//Get Users -> when we need update the above Post,Put,Delete methods are should be in comments
+	 http.get('http://jsonplaceholder.typicode.com/users')
+	.then(data => console.log(data))
+	 .catch(err => console.log(err));
+
+const data ={
+  name : "john doe",
+  username :"johndoe",
+  email : "jdoe@abc.com"
+
+}
+  //create user when we need update the above Put,Get,Delete methods are should be in comments
+	 http.post('http://jsonplaceholder.typicode.com/users',data)
+	.then(data => console.log(data))
+	 .catch(err => console.log(err));
+
+//update User -> when we need update the above Post,Get,Delete methods are should be in comments
+	http.put('http://jsonplaceholder.typicode.com/users/1',data)
+	.then(data => console.log(data))
+	.catch(err => console.log(err));
+
+//Delete User  ->when we need update the above Post,Get,Put methods are should be in comments
+	 http.delete('http://jsonplaceholder.typicode.com/users/1')
+	.then(data => console.log(data))
+	.catch(err => console.log(err));
+
+if we need all the HTTP verb We have use different service Http urls.
