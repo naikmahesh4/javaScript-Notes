@@ -1,0 +1,336 @@
+Error Handling in JavaScript:-
+
+in this error Handling in javascript the most part is try catch block.So, a try block let's just write some bit of code and test for errors and the catch block lets us handle those errors if there are any.
+
+/*Reference Error*/
+ try{  -> lets say
+my function(); -> we are calling the function,why will this fail becuz there is no declared to my function.(its actually going to be a reference error)
+} catch(e){ -> we are taking an error or e in catch method
+ console.log(e); 
+}
+
+console.log('Program continus...')
+ouput :- ReferenceError: myFunction is not defined at app.js  
+
+We can handle errors without stoppping the entire script so console.log('program continues..')
+
+oupt:-ReferenceError: myFunction is not defined
+ at appjs.2  program continious..
+
+Note :- So try catch block a very elegant way of handling errors.
+
+if you want to get message function not defined and don't get ReferenceError ,
+we have do 
+ try{
+myFunction()
+}catch(e){ console.log(e.message); } 
+output:- myFunction is not defined
+
+if u wanted to just type or actually it's called the name which is the type of error you could see ex:- console.log(e.name); -> output:- ReferencError
+
+we ca also test what kind of test it is by using instanceof
+ex:- console.log(e instanceof ReferenceError) 
+output:- true
+
+now coment out all the console and uncomment only e.now there is a third piece u could put onto this block and that's finally and all this does.
+
+finally {
+console.log('Finally runs reguardless of result..');
+}
+
+/*Type Error*/
+try{ null.myFunction() }
+catch(e){console.log(`${e.name} : Typically some we do try this..`)}
+finally{console.log("Finally runs regaurdless of result")}
+
+output:-TypeError: Cannot read property 'myFunction' of null
+ at app.js:17
+	TypeError:its a null stupid.
+
+/*SyntaxError*/
+
+try{ eval('2+2');  -> i'm going to use a eval function which isn't used too much but will evalute javascript within a string.for instance we could say 2+2 and have actual console.
+eval('hello world')}
+catch(e){console.log(e)}
+
+output:-SyntaxError: Unexpected identifier
+
+/*URI Error*/
+
+try{ 
+decodeURIComponent('%') -> we could a function called decodeURIComponent passing the Percentage sign.
+}
+catch(e){ console.log(e); }
+finally{console.log("Finally runs regaurdless of result")}
+
+output:- URIError: URI malformed
+ at decodeURIComponent
+
+Still now we have Seen Basically just Global Errors or Core errors being thrown so if we want we can create our own.
+
+const user = {email: "abc@gmail.com"}
+
+try{
+  if(!user.name){
+    throw 'user has no name';
+  }
+} catch(e){
+  console.log(e);
+}
+
+output:-user has no name
+
+
+const user = {email: "abc@gmail.com"}
+
+try{
+  if(!user.name){
+    throw new SyntaxError('user has no name);
+  }
+} catch(e){
+  console.log(`User Error : ${e.message}`);
+}
+
+output:-User Error: user has no name 
+-----------------------------------------------------------------------------------
+Regular Expressoins [part-1]-Evalution Functions :-
+
+Regular expression is basically used to describe a pattern of characters.So it is used for pattern matching or pattern searching.They're commonly used for validation as well as pulling things out of a body of text or a body of characters.so example e-mail addresses,phone numbers,social security numbers things that have certain patterns in their formatting.
+
+let re; -> initialize a variable called 're' for regular Expression.
+re = /hello/;  -> we gonna set that variable a regular expression literal in the way that we do that via and closing it in two forward slashes.
+
+now eaach one of these characters is a literal character.so it be taken at face value.
+
+console.log(re);  output :- /hello/
+
+console.log(re.source); output :- hello (source is used to print without slahes in output)
+
+/* exec() method  regular expression*/
+
+1.exec() - this will return in an array, if there is a match or it'll return null on a mismatch.
+ 
+let re;
+re=/hello/;
+
+const result = re.exec('hello world');
+
+console.log(result); output:-["hello", index: 0, input: "hello world", groups: undefined]
+
+we have  this array and inside of it we have hello which is the actual expression,Then we have the index. now index where is starts at,So we think of evaluting some kind of string like we have here for the expression it starts from the left end goes to the right.so it's reading from over and seeing the word Hello which matches the regular expression here which is just the literal word. for example if we change to "naik hello world" then the index=5 , its starts from 0. if we change to only "world" then results null ,means mismatch.
+
+console.log(result[0]); output:-hello
+console.log(result.index); output:- 0
+console.log(result.input);output:- hello world
+
+/*test() method in regular expression*/
+
+2.test()- it will return very simple returns true or false if there a match.
+
+let re;
+re=/hello/;
+re = /hello/i;  -> i = case insensitive
+re= /hello/g; -> g= Global search
+const result = re.test('Hello');
+console.log(result); output:- false (bcuz we have an upper case. and this is mismatch)
+if we console.log('hello'); then this results true.now you may want to make this case insensitive and this is where the flag comes in.So there are certain flags that regular expressions use and i is one of them and flags go after for literal.the i goes right there after re=/hello/i;  even there are case insensitive that returns true.
+
+/*match() method in regular expression*/
+3.match() - it will return result array if match or null if mismatch.  which is similar to exec() a little bit different. 
+
+let re;
+re=/hello/;  
+re=/hello/i;
+	
+instead of running it off the regular expression like re.something ,we Create a string that we want to match const str = 'hello there'.and then we're going to create a result and we,re going to set that to the str.result();
+
+const str = 'Hello There';
+const result = str.match(re);
+console.log(result); output:-null (bucz this also a case sensitive) 
+console.log(result); output:-["Hello", index: 0, input: "Hello There", groups: undefined]
+
+/*search()method in regular expression*/
+
+4.search() - this will return the index of the first match and if not found it returns -1.
+
+let re;
+re=/hello/;
+
+const str= "Hello There";
+const result =  str.search(re);
+console.log(result); output:- -1 (bucz there is mismatch of that in hello there is Upper case)
+if u give i to re so that will accept the regular expression.
+
+/*replace()method in regular expressioi*/
+5.replace() - it will return a new string with some or all of or all matches of a pattern.
+
+let re;
+re=/hello/;
+const str = "hello There";
+const newStr = str.replace(re, "Hi");
+console.log(newStr); output:- hi There
+
+this replaces the string regular expression to hi there. but this also a case sensitive .
+---------------------------------------------------------------------------------------------
+Regular Expression[part-2]-Metacharacter Symbol:-
+
+Before we do metacharcter and symbols i just wanna Create a Custom function that will basically console log and say regular expression contains whatever we put in or does not contain whatever we put. i'm just a cleaner way of handling the result.
+
+let re;
+//Literal characters
+re = /hello/;
+re=/hello/i;
+//Metacharacter Symbols
+re=/^h/i; -> Must starts with (it mean must starts with s and symbol is Cap)
+re=/d$/i; -> must ends with (it mean must end with d and symbol is dollar)
+re=/^hello$/i; -> Must begin with h and ends with o.
+re=/h.llo/i; -> Matches any one character (if we put in const str ='h*llo' it will pass similarly 'hrllo','h1llo, symbol,number,special character it will pass bucz this is a wild card passes anything)
+re=/h*llo/i; -> Matches any character 0 or more times (the reason it's working is bcuz the asterisk represents any character 0 or more times as zero)
+re=/gre?a?y/ -> Optional character ( here e and a are optional in const str = 'Grey' or 'Gray' or 'Gry' also passes in it)
+re=/gre?a?y\?/i; -> Escape character (here const str = 'Grey?' if we wanted this to be gray with actual question mark being used as a literal. so to escape something just like we would know regular javascript's string u wnat to do use backslash )
+
+//String to match
+const str = 'Hello There';
+//Log to Result
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str){ -> this expression takes two things
+  if(re.test(str)){
+console.log(`${str} matched ${re.source}`);
+  }else{
+    console.log(`${str} doesnot match ${re.source}`)
+	}
+}
+reTest(re, str);
+
+i'm just to give us another type of output on above the function
+
+output:- null app.js:12  Hello World does Not match hello app.js:19
+
+null gets from Log Result part 
+Hello World doen't match hello getting the expression and the reason it doesn't match is because we don't have the case the case sensitive flag. so after keeping re=/hello/i;
+then output is ["Hello,index:0,input:"Hello World"]; we're going to get the result array from the exec and then we're also going to get our little custom message from our custom reTest function.
+
+
+Well we're going to use literal characters along with MetaCharactes Symbols, There are different types of metacharacters symbols that we can use.
+
+output for re=/^h/i; ["h", index: 0, input: "hrad Hello World", groups: undefined] here if we keep space in const str = ' hello world' also doesnot match it.
+
+---------------------------------------------------------------------
+Regular Expression[part-3]- Character Sets & Qualifiers :-
+
+already we have thought about MetaCharaters & Symbols like caret to start with , the dollar to end with,dot like matches any one character, asterisk like 0 or more character,question like Optional character.
+Now i want to do is get into Character Sets using Brackets. this course has been pretty modular except for the project. Brackets are basically character sets.
+
+lets look an example with Optional Character.
+
+let re;
+//Brackets [] - Character Sets <---------------------->
+re=/gr[ae]y/; - must be a or e (output:-["gray", index: 0, input: "gray Color", groups: undefined], gray Color matches gr[ae]y ) this is the better solution for this about Escaping Character this also case sensitive.
+
+re = /[GF]ray/; - Must be  G or F output:-["Fray", index: 0, input: "Fray", groups: undefined] ,Fray matches [GF]ray 
+
+re=/[^GF]ray/; - Match anything except a G or F - here caret symbol ^ is used for starts with G or F so when the caret symbol is inside the barket mean not G and F , else there is out side mean only G and F. output:- const str = 'Xray' ["Xray", index: 0, input: "Xray", groups: undefined],Xray matches [^GF]ray
+
+
+re=/^[GF]ray/; - if Caret symbol is out side the barckets then it shoulg match only G and F.
+
+re=/[A-Z]ray/; - Match any Uppercase Letter (ex:- const str ='Cray'; it aslo pass through this expression only Uppercase pass and doen't pass lower caser bcuz we remove the i flag ).
+
+re=/[a-z]ray/; - Match any LowerCase Letter (same as above but only lower case)
+
+re=/[A-Za-z]ray/; - Match any letter
+
+re=/[0-9]ray/; - Match any digit  (if we match 2 digits ex:- const str = '10ray' then output:-["0ray", index: 0, input: "10ray", groups: undefined] 10ray matches [0-9]ray So the expression starts from 0 onwards mean @ 2nd digit through )
+
+re=/[o-9][0-9]ray/; match any digit (its gives two digit number ex:-const str = '22ray'
+output:- ["22ray", index: 0, input: "22ray", groups: undefined] 22ray matches [0-9][0-9]ray)
+
+Now lets look over the Qualifiers:-
+//Braces {} - qualifiers (now lets go back to the 'Hello' character) <---------------------->
+
+re=/Hel{2}o/i; - Must occur exactly {m} amount of times (Here we want to specify two L's ,we can put qualifier using curly bracles  and specify the number in braces then next L, that equals to the string matches)
+
+Similarly we can do more by using ranges ex:-
+re=/hel{2,4}o/i; - Must occur exactly {m} amount of times (but the range should be 2-4 only)
+
+re=/hel{2,}o/i; - Must occur atleast {m} times (but the range should be 2minimum and infity maximum bcuz after 2 there is no specific range only , cama is there )
+
+//Parenatheses () - Grouping  (this can be use with qualifiers)<---------------------->
+
+re=/^([0-9]t){3}$/; (const str = '3t3t3t'; so we can get output:- ["3t3t3t", "3t", index: 0, input: "3t3t3t"] , 3t3t3t matches ^([0-9]t){3}$)
+
+ 
+//string to match
+const str = 'gray color';
+//log to results
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str){
+	if(re.test(str)){
+	console.log(`${str} matches ${re.source}`);
+	}else{
+	console.log(`${str} does Not Matched ${re.source}`);
+	}
+
+}
+reTest(re, str);
+--------------------------------------------------------------------------------------
+Regular Expression[part-4]-shorthand Character Classes:-
+
+let re;
+//literal character
+re = /hello/;
+//parentheses () - grouping
+re = /^([0-9]y){5}$/;
+
+//Shorthand Character Classes  <---------------------->
+re=/\w/; // Word character - alphanumeric (meaning that it can be any letter or any number or it can be a underscore)
+
+  output:-["3", index: 0, input: "3y3y3y", groups: undefined],,3y3y3y matches \w 
+Here what heppens is it look it goes from left to right and it finds the first word character.
+
+re=/\w+/; - + = one or more (we have add plus + symbol to the expression so then the output is ["3y3y3y", index: 0, input: "3y3y3y", groups: undefined],3y3y3y matches \w+)
+
+re=/\W/; -Non-word character (meaning that it can't be any letter and can't be a number or it can't be a underscore only Special character matches for uppercase)
+
+We have digit 
+
+re=/\d/; -digit charcater matches any digit (it passes the digit in any number ex;- uyur34hj also)
+re=/\d+/; -matches any digit 0 or more times
+
+re=/\D/; - match any Non-digit same like word-character
+re=/\s/; - Match whitespace character
+re=/\S/; - Match  non-Whitespace character
+re=/hell\/i; - Word Boundary  ( if const str ='Hello, welcome to hell'; this gonna start with zero with zero index which is right here bcuz matches this.['Hell', index:0,input :'Hello,welcome to Hell']. We don't look for hello when we need for hell word so need a word-boundary now lets add a word boundary.
+re=/hell\b/i; - word-boundary output:- ["Hell",index:18,input:"Hello, welcome to Hell"] here the index is 18,it's not finding in Hello bcuz it is not word boundary it's just a word inside of a word
+
+//Assertions -( assertions are kind of like conditionals)<------------>
+
+re = /x(?=y)/; - Match x only if followed by y 
+ex:- const str='hajksdn'; output :- hajksdn does not matches x(?=y) -(bcuz y doesn't follow x )
+ex:- const str = 'klmnixyhjh'; output:- klmnixyhjh matches x(?=y) -(bcuz y follows x)
+
+re = /x(?!y)/; - Match x only if Not followed by y
+ex:- const str ='dxyz'; output:- dxyz doen't match x(?!y)
+ex:- const str='kjhih'; output:- kjhih matches x(?!y)
+
+
+
+//string Matches
+const str = "hello"
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re,str){
+	if(re.test(str)){
+	console.log(`${str} matches ${re.source}`);
+	}else{
+	console.log(`${str} matches ${re.source}`);
+	}
+	}
+reTest(re,str);
+
+Next Regular Expressions- Form Validation Project.

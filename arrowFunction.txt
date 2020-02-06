@@ -300,3 +300,5 @@ const data ={
 	.catch(err => console.log(err));
 
 if we need all the HTTP verb We have use different service Http urls.
+
+-------------------------------------------------------------------
