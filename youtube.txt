@@ -21,7 +21,7 @@ Reserve :- price.reverse(); it changes all the values in Array.
 concatenate Array :- val = price.concat(number) ;
 
 Sorting arrays:- val = price.sort(); 
-	   val = number.sort(); here we get only Starting digit will in serial no.
+	   val = number.sort(); here we get only Starting digit will in serial no (0-100),(a-z)
 Use compare function:- val = number.sort(function(x,y){ return x-y;});
 
 revers sort :- val = number.sort(function(x,y){return y-x;});
@@ -77,8 +77,13 @@ here we set the time :
 
 If Statement & Comparsion Operator :
 ---------------------------------------------
+	Difference between == and === operator in JavaScript.
+The ‘==’ operator tests for abstract equality i.e. it does the necessary 'type conversions' before doing the 'equality comparison'.
+But the ‘===’ operator tests for strict equality i.e it will not do the type conversion hence if the two values are not of the same type, when compared, it will return false	.
+
+
 	const id = 100;
-		//Equal To
+		// Abstract Equal To
 	if(id == 100){
 	console.log("correct")
 	}else{
@@ -90,7 +95,7 @@ If Statement & Comparsion Operator :
  	 }else{
   	  console.log("Wrong");
   	}
- 	 //Equal To Value & Type
+ 	 // Strict Equal To Value & Type
 	if(id === 100){
   	console.log("correct")
  	 }else{

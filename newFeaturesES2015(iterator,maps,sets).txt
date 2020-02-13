@@ -1,0 +1,298 @@
+New Features of ES6:-
+-----------------------------
+Iterators and Generators :-
+
+Iterators and Generators are both part of ES6 standard.So iterators and generators are both different but they're used in similar ways and they're both used to iterate something.
+So u can call part of a return pause it and then call the next part and so on.
+Iterators are kind of like Advance loops that can be paused and then generators or functions that can be paused and can return multiple values.
+
+example:-
+
+function nameIterator(names){
+    let nextIndex = 0;
+
+  return {
+	next: function(){
+	return nextIndex < names.length ?  Terinary Operator used in return,here is for console this was true, NextIndex is less than the length so it return  value : names [nextIndex++],done:false back to us in console
+	{value: names[nextIndex++],done:false} :
+	{done : true}
+	}
+    }
+}
+
+const nameArr = ['john', 'mill', 'jackey'];
+
+const names = nameIterator(nameArr);
+
+console.log(names.next());
+console.log(names.next());
+console.log(names.next().value) -> gets only name in console
+
+---------------------------------
+Generators:-
+
+Generators are similar but they're more  basically functions that can return multiple values. Ok they can what's called yield values.
+
+What’s the yield keyword in JavaScript?
+
+yield keyword is used to resume or pause a generator function asynchronously. A generator function is just like a normal function but the difference is that whenever the function is returning any value, it does it with the help of ‘yield’ keyword instead of return it. Yield can’t be called from nested functions or from callbacks.
+
+The yield expression returns an object with two properties, “value” which is the actual value and “done” which is a boolean value, it returns true when generator function is full completed else it returns false.
+
+If we pause the yield expression, the generator function will also get paused and resumes only when we call the next() method. When the next() method is encountered the function keeps on working until it faces another yield or returns expression.
+
+//Generator Example:
+function* sayNames(){
+yield 'jack';
+yield 'jill';
+yield 'naik';
+}
+const name = sayNames();
+console.log(name.next());
+console.log(name.next().value);
+
+//generator example 2:-
+function* createIds(){
+  let index = 0;
+ while(true){
+yield  index++;
+}
+}
+
+const gen =  createIds();
+
+console.log(gen.next());
+console.log(gen.next().value);
+---------------------------------------------------------------------
+Symbols:-
+
+this is second section,very briefly havn't talk about what they were we just established that they were in fact a primitive data type. and they are part of es6 standards.
+
+The unique thing about symbols is that every single one is completely unique.And this makes them very valiable in terms of things like object property identifiers.
+
+app.js:
+
+//create a symbol
+const sym1 = new Symbol() ; - TypeError ocurred becuz there's no constructor it's an actual primitive value.so remove the new keyword
+
+const sym2 = Symbol('sym2'); -we can add a identifier to sym2.
+
+console.log(sym2); -output: symbol(sym2)
+console.log(typeof sym2); -this gives the primitive value output:- symbol
+console.log(Symbol('123') == Symbol('123')); - No two Symbols can be same it show False(becuz they can never equal they can never be same,although if we keep same identifier also never be same)
+
+console.log(`Hello ${sym1}`) - TypeError:cannot convert a Symbol value to a  string .
+
+console.log(`Hello ${String(sym1)}`); or console.log(`Hello ${sym1.toSring()}`)
+
+//Unique Objects keys
+
+const KEY1 = Symbol();
+const KEY2 = Symbol('sym2');
+
+const myObj = {};
+
+myObj.KEY1 = 'prop1';  - when ever u want to use a variable as a key u don't want to go like  myObj.KEY1='prop1'; bcuz what it's doing is it's just looking at this as a normal property.
+
+If we want to use an actual variable then u want to use the brackets syntax like this myObj[KEY1] = 'prop1'; key one is a property in this case we're using actual symbol as a property.
+
+myObj[KEY1] = 'prop1';
+myObj[KEY2]='prop2';
+myObj.KEY3 = 'prop3';
+myObj.KEY4='prop4';
+
+console.log(myObj[KEY1]); output:- prop1
+console.log(myObj[KEY2]); output:- prop2
+
+
+SO there are Some Things that work a little different with symbols for one.if we were two loop through myObj for n then it wouldn't actually show up in the iteration bcuz they're not enumerable in four in iteration.
+
+//Symbols are not enumerbale in for..in
+
+for(let i in myObj){
+console.log(`${i}:${myObj[i]}`);
+}
+output:- key3:prop3
+             key4:prop
+Now u see we get Key3 and key4 .we're looping through myObj which has all of these in it two symbols and the two regular properties.
+Yet only two properties are showing up here because symbols again are not enumerable for..in loops
+
+-------
+Another Thing is symbols are ignored when using JSON.stringify().now JSON does string of what it does is it takes javascript object literal and turns into Json string
+
+//symbols are ignored by JSON.stringify
+console.log(JSON.stringify({key:'prop'}));
+console.log(JSon.stringify({[Symbol('sym1)]: 'prop'}));
+
+output:- {"key" : "prop"}
+	{} -> empty string
+
+--------------------------------------------------------------------------------
+Destructuring:-
+
+Destructuring was introduced in ES6 and it gives us easy way to assign variables and extract variables from arrays and objects.
+
+here we are using hard coded data for this destructuring
+//Destructuring Assignment
+let a,b;
+[a,b] = [100,200];
+console.log(a); - output:-100;
+console.log(b); -output:-200;
+
+The Rest Operator or rest pattern 
+let a,d
+[a,b,...rest] = [100,200,300,400,500]; - the variable is called rest and before rest there are 3 dots which is called a Spread Operator,But this is going to assign whatever's left over into an array into a variable called rest.
+
+console.log(rest); output:-(3) [30,40, 50]
+			0: 30
+			1: 40
+			2:50
+			length: 2
+
+({ a, b } = { a:100, b:200, c:300, d:400, e:500, });
+console.log(a,b); output:- 100,200
+
+({ a, b, ...rest } = {  a:100, b:200, c:300, d:400, e:500 }) ;
+console.log(rest); - output :- {c:300,d:400,e:500} 
+
+let's go a little further into both a Array destructuring and Object
+//Array Destructuring
+
+const people = ['john','miller','naik'];
+const [person1,person2,person3] = people;
+
+console.log(person1,person2,person3);
+
+//Parse array returned from function
+
+function getPeople(){
+return ['john','miller','naik']
+}
+
+let person1,person2,person3;
+[person1,person2,person3] = getPeople();
+
+console.log(person1,person2,person3);
+//Object Destructuring
+
+const person = {
+	name:'john deo',
+	age:30,
+	city:'miami',
+	gender:male
+	}
+//old ES5 
+	const name = person.name
+		age = person.age
+		city = person.city
+		gender = person.gender
+
+//new ES6 destructuring
+const {name,age,city,gender} = person;
+
+console.log(name,age,city,gender);-output : john Deo 30 miami
+
+-------------------------------------------------------------------------------------Maps:-
+
+Maps are a new object structure introduced in ECMA Script 6.A Map is an object that holds key value pairs and any value whether it's an object or you know an object referencr type or a primitive can be used as a key or value which is very different than just an object literal.
+
+//Maps = key-value pairs - can use ANY type as a key or value
+
+const map1 = new Map();  - create a variable map1 and we're going to set this to new map,So we call our new use the new keyword to use the constructor and call map. 
+//Set Keys 
+const key1 = 'some string'; - set key1 as a string
+        key2 = {},
+        key3 =  function(){}
+//Set map Values by keys
+map1.set(key1,'value of key1'); - we'll say map1 set and then pass in our key which is we want to use key1 in this case and we want to set the value which i'm just going to set to a string that say value of key1
+map1.set(key2,'value of key2');
+map1.set(key2,'value of key3');
+//Get Values by key
+console.log(map1.get(key1)); output:- value of key1
+//count values
+console.log(map1.size);
+
+//Iterating Maps
+
+//Loop using for..of to get keys and values
+for (let [key,value] of map1){
+console.log(`${key}=${value}`);
+}
+
+//Iterate keys only
+for(let keys of map1.key){
+console.log(key); }
+
+//iterate values only
+for(let values of map1.value){
+consolee.log(values) }
+
+//loop with ForEach
+map1.forEach(function(key,value){
+console.log(`${key} = ${value}`);
+});
+
+//Convert TO Arrays
+
+//create an array of the keys value pairs
+const keyValueArr = Array.from(map1);
+console.log(keyValueArr);
+
+//create an array of the value
+const valArr = Array.from(map1.Values());
+console.log(valArr);
+
+//create an array of the key
+const keyArr = Arrau.from(map1.keys());
+console.log(keyArr);
+
+-----------------------------------------------------------------------------
+ES6 Sets:-
+
+Sets are basically unique values.it's a list of set of unique value of any type whether it's primitive or reference.
+
+//Set - stored the unique value of any type
+  const set1 = new Set();
+//Add values to set
+  set1.add('A string');
+  set1.add(100);
+  set1.add({name:'naik'});
+  set1.add(true);
+  set1.add(100);
+
+console.log(set1); output:- Set(4) {"A string", 100, {…}, true, (1)} -here there is tw0 values are set1.add(100) are same so then it results only one value.
+ 
+other way:- 
+const set2 = new set(["title1",30,true,{name:'naik'},['kill','bill']]);
+console.log(set2); output:-Set(5) {"title1", 30, true, {…}, Array(2)}
+
+we can use either set1 or set2 for store unique values
+//Get set Count
+console.log(set1.size); output:-4
+
+//Check for Values
+console.log(set1.has(100)); output:- true
+console.log(set1.has(50 + 50); ouput:-true
+console.log(set1.has({name:'naik'}); ouput:- false - when there is same   object in set1.add() and set1.has() , but u remember back to data types   this is a reference object this is not. This is not a primitive value that's    actually stored in the stack. it's stored in the HEAP which makes it a   reference value. so example:- console.log({name:'naik'} ===   {name:'naik'}); this gives to output false bcuz it's pointing to a     different location in memory , this is not a primitive type like a number   or a string or a boolean, if say console.log('hello' === 'hello'); then it   gives true bcuz it is a primitive value.
+
+//Delete from set
+set1.delete(100);
+console.log(set1); here 100 is deleted
+
+//Iterating Through Sets
+
+//for..of
+for(let sets of set1){
+console.log(sets)};
+
+//forEach loop
+set1.forEach(function(item){
+console.log(item); });  output:- title
+			20
+			{name:'naik'}
+//Convert set to Array
+ as maps we can convert set to array,
+const setArr = Array.from(set1);
+console.log(setArr);
+
+

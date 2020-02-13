@@ -1,0 +1,133 @@
+Tracalorie Project (Using the Module Pattern):-
+ 
+Project Detail:-
+
+In this Project we build a meal and calorie tracker and we're going to use the JavaScript module Patter for this and also going to use local storage so that we can persist the data so that it stays after we we load the page or close the browser or whatever. So basically have a few different controllers kind of three different module controllers,A storage controller for local storage although that will be last thing. we have a item controller to deal with actual data.The state will have a UI Controller to work with UI.
+----------------
+
+Creating the UI with MaterializeCSS:-
+
+We going to start on our application using the module pattern our track calorie app. we're just going to start off by just creating the markup we're using materialise CSS for our UI framework.
+
+We're going to need a couple of things to include here one of course is material CSS so we will go "https://materializecss.com/getting-started.html", And next we going to font awesome icons are not icons CDN because we want to include, we'll get it from this bootstrap CDN "https://www.bootstrapcdn.com/fontawesome/". and we also we gonna user the javascriptcdn and also jquery cdn 
+
+
+index.html:
+------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <title>TraCalorie | Meal & Calorie Tracker</title>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-wrapper blue">
+      <div class="container">
+        <a href="#" class="brand-logo center">Tracalorie</a>
+        <ul class="right">
+          <li><a href="#" class="clear btn blue lighten-3">Clear All</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <div class="container">
+    <!-- Form Card -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Add a Meal / Food Item</span>
+        <form class="col">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" name="item-name" id="item-name" placeholder="Add Item">
+              <label for="item-name">Meal</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" name="item-calorie" id="item-calories" placeholder="Add Calories">
+              <label for="item-calories">Calories</label>
+            </div>
+            <button class="add-btn btn blue darken-3"><i class="fa fa-plus">&nbsp;Add Meal</i></button>
+            <!-- <button class="update-btn btn orange"><i class="fa fa-pencil-square-o">Update</i></button>
+            <button class="delete-btn btn red"><i class="fa fa-remove">Delete Meal</i></button> -->
+            <button class="back-btn btn grey pull-right"><i class="fa fa-chevron-circle-left">Back</i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Calorie Count -->
+    <h3 class="center-align">Total Calories : <span class="total-calories">0</span></h3>
+    <!--  Item-List -->
+    <ul id="item-list" class="collection">
+      <!-- <li class="collection-item" id="item-0">
+        <strong>Steak Dinner:</strong> <em>1200 calroies</em>
+        <a href="#" class="secondary-content"><i class="fa fa-pencil"></i></a>
+      </li>
+      <li class="collection-item" id="item-0">
+          <strong>Cookies :</strong> <em>700 calroies</em>
+          <a href="#" class="secondary-content"><i class="fa fa-pencil"></i></a>
+        </li>
+        <li class="collection-item" id="item-0">
+            <strong>yogurt :</strong> <em>1000 calroies</em>
+            <a href="#" class="secondary-content"><i class="fa fa-pencil"></i></a>
+          </li> -->
+    </ul> 
+  </div>
+
+ <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+here we are commenting some stuff becuz we had hard coded the for UI so we're going to do dynamic all in javascript.
+
+-We're going to have a Storage Controller for local Storage which is going to happen till the end.
+-We're all going to have an Item Controller for our local Data that have to do it. you know the item and the calories.
+-We'll have our UI controller that has to do anything to do with the UI.you know showing,hidding things,getting input.
+-We'll have our main app control of where everything will meet and also where we're going to put our intial event listeners and we also have our  initialiser our nit function there.
+
+//Storage Controller
+//Item Controller
+   //Item Constructor
+   const Item = function(id,name,calories){
+    this.id = id;  - so with any constructor we need to set thids store and then the property to the property being passed.
+    this.name = name;
+    this.calories = calories;
+  //Data Structure / State
+  const data = {
+   items : [   -we're hard coded data 
+   {id=0,name: 'Steak Dinner',Calories: 300};
+   {id=1,name: 'Cookies',Calories: 500};
+   {id=2,name: 'Eggs',Calories: 600};     --.as we talked about in the module pattern this stuff is private,This is not accessiable for instance from chrome, and we look over in chrome ItemCtrl.data it shows TypeError: cannot read property 'data' of undefined. so if we want to able to access this data which i actually do want to have a function to access to testing out,we're ging to have to return. Ok whatever we return from the module is what i going to be public.
+	 ],
+
+   currentItem:null,	- what i mean currentItem is when we go to update if i click the update icon we're going to want that paticular item that meal item to be the current item and then next we're going to get put up here in the form to be updated.
+
+   totalCalories: 0
+ 	}
+   return {    - by return we can access the data in chrome.(ItemCtrl.logData())
+       logData: function(){
+ 	return data;
+	}
+     }
+
+      })();
+
+//UI Controller
+const UICtrl = (function(){
+})();
+
+//App Controller
+const App = (function(){
+console.log(ItemCtrl.logData());  - output:{items:Array(3),currentItem:null,totalCalories:0}
+})();

@@ -1,0 +1,559 @@
+JavaScript Patterns:-
+-----------------------
+ -> A re-usable solution that can be applied to occuring problems in software design(JavaScript Applications). but all language have patterns.
+	u can also think of them as programming templates and a way to create a specific way for writing code.
+-> Can also be thought of as programming templates
+-> Situations vary significantly
+	Some Patterns like factory and prototype patterns are used for object creation.The module pattern and all of its variatoins are used for overall structure. Then u have to complete software design patterns like MVC which is Model View Controller pattern and these can apply to whole applications or to just little blocks of code.
+
+We've already used some of the patterns and paarts of such as Constructor pattern,prototype patterns.
+
+we gonna Look at 
+1.Module - Over all Structure breaks our code into module,or we can have private function and variables and public functions and variables
+
+2.Revealing Module Pattern -
+
+3.Singleton -which is kind of variation of the module pattern,where we can only create one instance of an object.
+
+4.Factory - which is used to create many objects.
+
+5.Observer - which allows us to basically subscribe and unsubscribe to events. 
+
+6.Mediator - which is kindof has a central mediator and then it hass colleagues that separate off.
+
+7.State - which allows us to have a certain state in our appliction and change the state.
+
+
+-------------------------------------------------------------------
+Module & Revealing Module Pattern:-
+
+The first pattern w're going to look into is the module pattern and a slight variation is called Revealing Module Pattern.
+Now i want to mention that ES-6 oe ES-5 introduced actual module in javaScript meaning that we can use separate files to export modules which are just custom pieces of code and import them into a new file.
+
+However this is still not supported in browsers.you have to use a compiler like Babel along with a module loader like WebPack to work.
+
+But in the Es5 we have somthing called module pattern that allows us to break up parts of our code into self-contained modules with private properties and methods or private variables and functions.
+
+app.js:
+---
+//Basic structure
+
+ () ->imediate invoked function,we need to wrap it in parentheses to make it an expression we need to put a function in here anonymous and put parenthesis for call the invok function.
+I mean by private meaning that we can't access it from outside the module.And when wheneverwe return this is where we declear public variables and functions.So that's the Blue Print for the module pattern.
+	(Module pattern where we're going to have an item controller.Each module will be it's own controller of an item controller that will take care of the meal items that we add will have a UI controller that will take care of anything to do with the UI so clicks and form submissions rendering stuff in the UI.Anything to dowith that will be in UI controller will have a storage controller that will persist things to local storage and then we'll have a main app controller where everything will kind of meet and we'll call an initialiser.
+
+	(function(){
+ 	 //Declear private variables and functions
+
+	 return {
+	  //Declear public variables and functions
+	}
+	})();
+//Standard Module Pattern  - we can access any value any variable we put here we can access from within this function.now both of these are private.we can access these from outside of this module of the controller module.
+
+const UIController = (function(){
+    let text = 'Hello World';
+
+   const changeText = function(){
+	const element = document.querySelector('h1');
+	element.textContent = text;
+}
+
+return {  - we return is going to be public which is stufff that we can access from outside.
+
+callChangeText : function(){
+changeText();
+console.log(text);
+}
+
+}	
+})();
+
+UIController.callChangeText();
+
+//Revealing Module Pattern
+The main difference is that instead of returning our own public functions like we did here basically map an object literal and you map to private functions that we want to reveal. And that's why it's called 'revealing pattern' bcuz you can reveal certain methods from ur module.
+
+const ItemControll = (function(){
+	const data = [];
+	(const _data=[] lot of times u might see an Underscore with variables bcuz this is private variable,this is allowed but u should only do it if it is a private variable and you're only goint to deal with private variables in more advanced stuff like this using a different pattens)
+
+
+  function add(item){
+ data.push(item);
+console.log('Item Added...')
+}
+
+  function get(id){
+ return data.find(item => {
+return item.id === id;
+});
+return {
+add:add,
+get:get
+}
+}
+})();
+ItemController.add({id:1,name:'john'});
+ItemController.add({id:2,name:'naik'});
+console.log(ItemController.get(1,2));
+
+
+------------------------------------------------------------------------------
+SingleTon Pattern:
+
+A Singleton pattern a manifestion of the module pattern a singleton object is an immediate anonymous function and it can only return one instance of an object at a time. 
+SO repeated calls to the constructor will just return the same instance and like the module pattern it maintains a pritive reference which nothing from the outside can access.
+Now an example of why u may want to use a singleton is maybe u only want for instance one user object created at a time maybe a logged in user.it would be prevent u from having two users from being created at once.
+
+const Singleton = (function(){ --> imediate invoke function
+let instance;
+
+function changeInstance(){
+  const object = new Object('naik');
+return object;
+}
+return{
+  getInstance : function(){
+if(!instance){
+ instance = changeInstance();
+	}
+ return instance
+ }
+
+}
+})();
+
+const instanceA = Singleton.getInstance();
+const instanceB = Singleton.getInstance();
+
+//console.log(instanceA);
+console.log(instanceA === instanceB);
+
+So we never have more than one instance even if we try.
+
+---------------------------------------------------------------------------------
+Factory Pattern:
+
+Factory pattern is also called Factory Method in javascript which is a way of creating an interface for creating objects but we can let subclasses define which classes to instantiate and factory methods are often used in applications to manage and maintain and manipulate collections of objects that are different,But at the same time have many common characteristics and a good example of that would be a member.
+
+function MemberFactory(){  -we're going to do function memberFactory it's just a declaration.
+ this.createMember = function(name,type){  -just create a member,so this function is going to take two things identifier.
+  let member;  - here we gonna define a variable member;
+
+   if(type === 'simple'){  -- we want to check the types here that are passes in or the type that's passed in and basically going by the type we want to create a new object or a certain typeof object so we'll have a simple membershi,standard,super,May be its a web hosting application website or something like that.
+    member = new SimpleMemberShip(name); -- we gonna set to member and new then instantiate.
+   }else if(type === 'standard'){
+    member = new StandardMemberShip(name);
+   }else if(type === 'super'{
+    member = new SuperMemberShip(name);
+   }
+
+we're testing out whatever that type is and we want to set the member.
+
+  member.type = type;
+  
+Then i'm just going to have one function or one method associated with this object called define that that's going to spit out the name the type membership type and the cost of the membership.
+
+  member.define = function(){
+  console.log(`${this.name}(${this.type}):${this.cost}`);
+	}
+   return member;
+}
+}
+ So now we need to do is create our constructors for these(SimpleMemberShip,StandardMemberShip,SuperMemberShip) subclasses.
+
+Here create a variable called simpleMembership and set that to a function and pass the name in parameter.
+
+const SimpleMemberShip = function(name){
+	this.name = name;
+	this.cost = '5 rupees';
+}
+
+const StandardMemberShip = function(name){
+	this.name = name;
+	this.cost = '10 rupees';
+}
+
+const SuperMemberShip = function(name){
+	this.name = name;
+	this.cost = '15 rupees';
+}
+
+Let's create a variable called members and just set it an empty array
+	const members = [];
+so define a factory .
+const factory = new MemberFactory();
+
+We can add members by simply saying members.push
+
+	members.push(factory.createMember('mahesh','simple'));
+	//console.log(members);
+
+we just wanna loop through it 
+
+	members.forEach(function(member){
+	   member.define();
+	});
+
+-----------------------------------------------------------------------------------
+Observer Pattern:-
+
+Observer pattern which allows us to subscribe and unsubscribe to certain events or certain functionality.this is very interesting patterns,it can be used to notify the DOM of certain elements to be updated.it actually angular js relies heavily on this pattern through event management within the scope.Here first we gonna look an example using prototype and then after looking an example using ES6 classes. 
+So we're going to create some buttons that will allows us to subscribe and unsubscribe to certain click events.
+First thing we'll do is create a little UI here we're just going to add a couple of buttons.We're not going to use Skeleton or anything it's just going to be a couple of buttons so i don't want to adda ny framework or anything like that so it's create a button and we're going to give this button.
+
+index.html:
+--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Javascript sanbox:Observer</title>
+</head>
+<body>
+  <button class="sub-ms">Subscribe to Milliseconds</button> -bcuz these are going to do is they're going to subscribe allow us to subscribe and unsubscribe to click event to get seconds to console log the current seconds and using the date method.and then we'll create buttons to subscrribe and unsunscribe to getting milliseconds actually do milliseconds first.
+<button class="unsub-ms">Unsubscribe to Milliseconds</button>
+<button class="sub-s">Subscribe to seconds</button>
+<button class="unsub-s">Unsubscribe to seconds</button>
+<br><br>
+<button class="fire">Fire</button>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+app.js: (using Prototype ES5 method)
+----
+Now We want to create a constructor function called event observer. this constructive function will have one property called observers which repesents the functions and passes an empty array.
+
+function EventObserver(){
+   this.observers = [ ];
+}
+
+we are going to create a prototype.
+EvenObserver.prototype = {  -this prototype will be set to an object
+  sunscribe : function(fn){  -we want to be able to subscribe to this function and we want to push it on to our observers.
+	this.observers.push(fn); 
+  	console.log(`your are now subscribed to ${fn.name}`) - i just want to do a console to just notify the user that they're actually subscribed to the handler.
+	}
+  Unsubscribe : function(fn){
+// Filter out from the list whatever matches the callback function.If there is no match,the callback gets to stay on the list. The filter returns a new list and re-asigns the list of observers.
+
+	this.observers = this.observers.filter( function(item){ - basically mutating this we're going to say filter pass and a callback function.
+	if(item !== fn){	-this callback is going to take in or say item and we'll say if item representing the function passes in if the item is not equal to the function that's being passed in here. 
+	return item;
+
+So if it's you're Unsubscribing from a certain function that one will be removed but it'll generate a new list that has the rest of the function that are subscribed to and that may be hard to understand but unless,it'll be clearer when you actually see it work.
+	}	
+         });
+	console.log(`you are now unsubscribe from ${fn.name}`)  
+       },
+Now last method we're going to have in here is the actual fire.
+      fire: function(){
+      this.observers.forEach( function(item){ - we want to do here is loop through the observers.
+	item.call();
+});
+	} 
+}
+
+Lets instantiate it we'll call we'll create a variable called click and set it our new event observer
+
+const click = new EventObserver();
+
+//Event Listeners
+
+document.querySelector('.sub-ms').addEventListener('click', function(){
+  click.subscribe(getMilliseconds);  - to get subscribe millisecondas we have create a variable to set up to a function that gives a 'Date' method to get milliseconds
+});
+
+const getMilliseconds =  function(){
+console.log(`Current MilliSeconds: ${new Date().getMilliseconds()}`);
+}
+
+const getSeconds =  function(){
+console.log(`Current MilliSeconds: ${new Date().getseconds()}`);
+}
+
+document.querySelector('.unsub-ms').addEventListener('click',function(){
+click.unsubscribe(getMilliseconds);
+};
+
+document.querySelector('.unsub-s').addEventListener('click',function(){
+click.unsubscribe(getSeconds);
+};
+
+document.querySelector('.unsub-s').addEventListener('click',function(){
+click.unsubscribe(getSeconds);
+};
+
+document.querySelector('.fire').addEventListener('click',function(){
+click.fire();
+};
+
+
+ES6.js : (using ES6 )
+----
+
+class EventObserver{
+  constructor(){
+    this.observers = [];
+  }
+  subscribe(fn){
+    this.observers.push(fn);
+    console.log(`you have subcribe to ${fn.name}`);
+  }
+  unsubscribe(fn){
+    this.observers = this.observers.filter(function(item){
+      if(item !== fn){
+        return item;
+      }
+    });
+    console.log(`you have unsubcribe to ${fn.name}`)
+  }
+  fire(){
+    this.observers.forEach(function(item){
+      item.call();
+    });
+  }
+}
+ const click = new EventObserver();
+
+ //EventListener
+
+ document.querySelector('.sub-ms').addEventListener('click',function(){
+   click.subscribe(getMilliseconds);
+ });
+
+ document.querySelector('.unsub-ms').addEventListener('click',function(){
+  click.unsubscribe(getMilliseconds);
+  });
+
+  document.querySelector('.sub-s').addEventListener('click',function(){
+    click.subscribe(getSeconds);
+  });
+ 
+  document.querySelector('.unsub-s').addEventListener('click',function(){
+    click.unsubscribe(getSeconds);
+  });
+ 
+
+ const getMilliseconds = function(){
+   console.log(`Current Milliseconds : ${new Date().getMilliseconds()}`);
+ }
+
+ const getSeconds = function(){
+  console.log(`Current Milliseconds : ${new Date().getseconds()}`);
+}
+
+
+----------------------------------------------------------------------------------
+Mediator Pattern:
+---
+Next pattern we're going to look at is another behavioral pattern like observer it's called the Mediator pattern and the idea is to have a mediator which is basically an interface for communicating with what are colleagues which are just mediated objects. One of the best examples is chat room.
+
+So we're going to have two construct function one for the user and one for chat room.
+
+app.js:
+ const User = function(name){
+this.name = name;
+this.chatroom = null;
+}
+
+ And ides is to able to have users that can send messages to another single user or to broadcast to entire chat room. And again the chat room is the mediator and then the users of the colleagues of the chat room.
+  User.prototype = {
+  send: function( message, to){ 	-send function will take in any message and to sort of be wherever the message and then user to use
+     this.chatroom.seng(message, this, to)  - chatroom will also have send and will pass in the message. ('this' in parameter is pertainig to user)
+	},
+  receive:function(message, from){  //receive function
+	console.log(`${from.name} to ${this.name}:${message}`)
+	}
+  }	
+
+const  chatroom = function(){ -> we'll also have a constructor function for the chat room.
+let users = {}; //list of users (set to an empty object)
+
+  return {
+            register: function(user){ -first we've to register bcuz we need users to register with the chat room.the colleagues have to register with themediator.
+	
+           users[user.name] = user;  -And we're going to set users and then as KEY we're going to use user.name and is set to user that's being passed.
+         user.chatroom = this;  - we gonna set user.chatroom to this day to get to the current chat room and look (this.chatroom = null) by default but now we're setting it to the current chat room.
+	},
+         send:function(message,from,to){
+	 if(to){   - here we need to decide if the message is going to a certain use or if it's going to be boardcasted to the entire run ,we going to check to see if there's a true value.
+	//Single  user message
+	to.receive(message,from)
+	      }else{
+		//mass Message
+	 for(key in user){
+		if(users[key] !== from){
+		users[key].receive(message,from);
+		}
+		}
+		}
+	}
+
+      }
+} 
+ We are going to create a couple of users.
+const naik = new User('Naik');
+const mahesh = new User('Mahesh');
+const sara = new User('sara')
+;
+we are going to add a mediator chatroom
+const chatroom = new Chatroom();
+
+chatroom keep it in uppercase our chat room door register know we want to register.
+
+chatroom.register(naik);
+chatroom.register(mahesh);
+chatroom.register(sara);
+now we register and we should be able to send messages.
+naik.send('hello mahesh', mahesh);
+mahesh.send('hello sara, you are the best',sara);
+
+
+--------------------------------------------------------------------------------------
+State Pattern :-
+
+We're going to look at the State Pattern which is another behaviour type pattern,And i think it's awesoome and sort of reminds how state managers like reebok's work.we have a state that we can change it throughout scripts so if we want to do certain things on certain states or display certain content we can do that states or display certain content we can do that.
+
+index.html:
+--
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>State Pattern</title>
+   </head>
+      <body>
+          <h1>Hello, world!</h1>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+              <a href="#" class="navbar-brand">State Pattern</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+	 <span class="navbar-toggler-icon"></span></button>
+
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   <ul class="navbar-nav mr-auto">
+                      <li class="navbar-item"><a href="#" class="nav-link" id="home">Home</a></li>
+          	        <li class="navbar-item"><a href="#" class="nav-link" id="About">About</a></li>
+          	           <li class="navbar-item"><a href="#" class="nav-link" id="contact">Contact</a></li>
+       	     </ul>
+
+                </div>
+           </nav>
+
+         <div class="container">
+           <h1 id="heading"></h1>
+          <div id="content"></div>
+        </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-J3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpG              FF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B		+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-		JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
+app.js:
+----
+ lets create a variable called Page state and we're going to set that to a function.
+
+const PageState = function(){
+  let currentState = new homeState(this)  -here let's create a variable called current state,So we're going to set a constructor to new homeState and then pass 'this' which pertains to this function this page.
+Now We're going to have two functions or two methods within the page state.
+
+   this.init = function(){  -lets call initialize and set to a function 
+         this.change(new homeState);  -So this change is another function we're going to create and that's going to be used to change the current state.
+Now when we call initialize it's just going to load the home state.
+    }
+
+   this.change = function(state){
+      currentState = state;
+   }
+}
+
+Now create the different states in what we want to happen inside of them.
+//Home State
+
+const homeState = function(page){
+  document.querySelector('#heading').textContent = null;  -i want to select the header becuz we're dong is modifying the output we're modifying the 'UI' depending on the state that we're taking textContent which is equal to null. 
+All i want is a 'Jumbotron displayed' on the homepage
+  document.querySelector('#content').innerHTML = `
+   <div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
+   `
+}
+  //About State
+  const aboutState = function(page){
+   document.querySelector('#heading').textContent = 'About us';
+   document.querySelector('#content').innerHTML = `
+     <p>this is a contact page</p>
+    `
+};
+ //Contact State
+  const contactState = function(page){
+   document.querySelector('#heading').textContent = 'contact us';
+   document.querySelector('#content').innerHTML = `
+     <form>
+	<div class="form-group">
+	  <label>Name</label>
+	  <input type="text" class="form-control">
+	</div>
+	<div class="form-group">
+	  <label>Email address</label>
+	  <input type="email" class="form-control">
+	</div>
+	<button type="submit" class="btn btn-	primary">Submit</button>
+     </form>
+    `;
+};
+//Instantiate Pagestate
+const page = new PageState();
+//initalize the first state
+page.init();
+
+Now we want to do is make when we click these links up here we call event listeners that will change the state.
+
+//UI variables.
+  const home =  document.getElementById('home');
+           about =  document.getElementById('about');
+          contact =  document.getElementById('contact');
+//Home
+home.addEventListener('click', (e) => {
+page.change(new homeState);
+e.preventDefault();
+});
+
+//About page
+about.addEventListener('click', (e) => {
+page.change(new aboutState);
+e.preventDefault();
+});
+
+//contact page
+contact.addEventListener('click', (e) => {
+page.change(new contactState);
+e.preventDefault();
+});
+
+This kind of not really a practical example because this isn't like a dynamic appliction.usually u'd have like an edit state stuff like that list state.
